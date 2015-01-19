@@ -11,5 +11,7 @@ public class TestCircle { // save as "TestCircle.java"
 		Circle c2 = new Circle(2.0);
 		// Use the dot operator to invoke methods of instance c2.
 		System.out.println("The circle has radius of " + c2.getRadius() + " and area of " + c2.getArea());
+		
+		Circle c3 = new Circle(2.0, "Blue");
 	}
 }
