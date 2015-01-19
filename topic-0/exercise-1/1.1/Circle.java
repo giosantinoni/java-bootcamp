@@ -29,4 +29,8 @@ public class Circle { // save as "Circle.java"
 	public double getArea() {
 		return radius * radius * Math.PI;
 	}
+	
+	public String getColor() {
+		return color;
+	}
 }
