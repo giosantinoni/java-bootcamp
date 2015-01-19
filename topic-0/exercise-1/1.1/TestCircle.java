@@ -14,5 +14,9 @@ public class TestCircle { // save as "TestCircle.java"
 		
 		Circle c3 = new Circle(3.0, "Blue");
 		System.out.println("The circle has radius of " + c3.getRadius() + " and color " + c3.getColor());
+		
+		Circle c4 = new Circle();   // construct an instance of Circle
+		c4.setRadius(5.0);          // change radius
+		c4.setColor("Black");       // change color
 	}
 }
