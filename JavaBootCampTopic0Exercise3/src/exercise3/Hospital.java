@@ -1,48 +1,41 @@
 package exercise3;
+import java.util.ArrayList;
 
-public class Hospital {
+public class Hospital extends Building {
 	
-	private String emergencyRoom;
-	private String intensiveCareWard;
-	private String guardWard;
-	private String mainHall;
-	private String privateRoom;
 	
-	public String getEmergencyRoom() {
-		return emergencyRoom;
+	private String hospitalName;
+
+	public String getHospitalName() {
+		return hospitalName;
 	}
-	public void setEmergencyRoom(String emergencyRoom) {
-		this.emergencyRoom = emergencyRoom;
-	}
-	public String getIntensiveCareWard() {
-		return intensiveCareWard;
-	}
-	public void setIntensiveCareWard(String intensiveCareWard) {
-		this.intensiveCareWard = intensiveCareWard;
-	}
-	public String getGuardWard() {
-		return guardWard;
-	}
-	public void setGuardWard(String guardWard) {
-		this.guardWard = guardWard;
-	}
-	public String getMainHall() {
-		return mainHall;
-	}
-	public void setMainHall(String mainHall) {
-		this.mainHall = mainHall;
-	}
-	public String getPrivateRoom() {
-		return privateRoom;
-	}
-	public void setPrivateRoom(String privateRoom) {
-		this.privateRoom = privateRoom;
+
+	public void setHospitalName(String hospitalName) {
+		this.hospitalName = hospitalName;
 	}
 	
+	public Hospital(String hospitalName){
+		this.hospitalName=hospitalName;
+		
+		rooms = new ArrayList<Room>();
+		
+		RoomBuilder ICWB = new IntensiveCareWardBuilder();
+		RoomBuilder mainHall = new MainHallBuilder();
+		
+		//Creating an Intensive Care Ward
+		RoomDirector roomDirector = new RoomDirector(ICWB);
+		roomDirector.constructRoom();
+		super.rooms.add(roomDirector.getRoom());
+		
+		//Creating a Main Hall
+		roomDirector= new RoomDirector(mainHall);
+		roomDirector.constructRoom();
+		super.rooms.add(roomDirector.getRoom());
+	}
+
 	@Override
 	public String toString() {
-		return "Hospital [emergencyRoom=" + "\n" + emergencyRoom + "\n" + ", intensiveCareWard=" + "\n" + intensiveCareWard + "\n" + ", guardWard=" + "\n" + guardWard
-				+ "\n" + ", mainHall=" + "\n" + mainHall + "\n" + ", privateRoom=" + "\n" + privateRoom + "]";
+		return "Hospital [hospitalName=" + hospitalName + ", rooms=" + rooms + "]";
 	}
 	
 	
