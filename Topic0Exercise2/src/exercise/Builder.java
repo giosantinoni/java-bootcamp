@@ -1,37 +1,50 @@
 package exercise;
 
 public class Builder implements IBuilder {
+	private House house;
 	
-	/**
-	 * Returns a new instance of <code>House</code>.
-	 * @return
-	 */
+	public Builder() {
+		house = new House();
+	}
+	
 	@Override
-	public House buildHouse() {
-		House house = new House();
-		
-		System.out.println("Beginning Construction.");
-		
+	public void buildFloor() {
 		System.out.println("Building floor.");
 		house.setFloor(true);
-		
+	}
+
+	@Override
+	public void buildWalls() {
 		System.out.println("Building walls.");
 		house.setWalls(true);
-		
+	}
+
+	@Override
+	public void buildRoof() {
 		System.out.println("Building roof.");
 		house.setRoof(true);
-		
+	}
+
+	@Override
+	public void putDoors() {
 		System.out.println("Putting doors.");
 		house.setDoors(true);
-		
+	}
+
+	@Override
+	public void putWindows() {
 		System.out.println("Putting windows.");
 		house.setWindows(true);
-		
+	}
+
+	@Override
+	public void paintBuilding() {
 		System.out.println("Painting house.");
 		house.setPainted(true);
-		
-		System.out.println("House finished.");
-		
+	}
+	
+	@Override
+	public House getHouse() {
 		return house;
 	}
 
