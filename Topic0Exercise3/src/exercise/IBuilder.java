@@ -11,7 +11,7 @@ public interface IBuilder {
 
 	void putWindows();
 
-	void paintBuilding();
+	void paint();
 	
-	House getHouse();
+	Room getRoom();
 }

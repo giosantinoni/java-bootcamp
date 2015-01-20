@@ -1,51 +1,51 @@
 package exercise;
 
 public class Builder implements IBuilder {
-	private House house;
+	private Room room;
 	
 	public Builder() {
-		house = new House();
+		room = new Room();
 	}
 	
 	@Override
 	public void buildFloor() {
 		System.out.println("Building floor.");
-		house.setFloor(true);
+		room.setFloor(true);
 	}
 
 	@Override
 	public void buildWalls() {
 		System.out.println("Building walls.");
-		house.setWalls(true);
+		room.setWalls(true);
 	}
 
 	@Override
 	public void buildRoof() {
 		System.out.println("Building roof.");
-		house.setRoof(true);
+		room.setRoof(true);
 	}
 
 	@Override
 	public void putDoors() {
 		System.out.println("Putting doors.");
-		house.setDoors(true);
+		room.setDoors(true);
 	}
 
 	@Override
 	public void putWindows() {
 		System.out.println("Putting windows.");
-		house.setWindows(true);
+		room.setWindows(true);
 	}
 
 	@Override
-	public void paintBuilding() {
+	public void paint() {
 		System.out.println("Painting house.");
-		house.setPainted(true);
+		room.setPainted(true);
 	}
 	
 	@Override
-	public House getHouse() {
-		return house;
+	public Room getRoom() {
+		return room;
 	}
 
 }
