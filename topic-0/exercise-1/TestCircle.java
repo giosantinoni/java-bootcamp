@@ -18,5 +18,13 @@ public class TestCircle { // save as "TestCircle.java"
 		Circle c4 = new Circle();   // construct an instance of Circle
 		c4.setRadius(5.0);          // change radius
 		c4.setColor("Black");       // change color
+		
+		Circle c5 = new Circle(6.0);
+		System.out.println(c5.toString());   // explicit call
+		
+		Circle c6 = new Circle(1.2);
+		System.out.println(c6.toString());  // explicit call
+		System.out.println(c6);             // println() calls toString() implicitly, same as above
+		System.out.println("Operator '+' invokes toString() too: " + c6);  // '+' invokes toString() too
 	}
 }
