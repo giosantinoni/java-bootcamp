@@ -1,8 +1,8 @@
-package shoppingcart.services;
+package shoppingcart.factory;
 
-import shoppingcart.model.CreditCard;
-import shoppingcart.model.Payment;
-import shoppingcart.model.Paypal;
+import shoppingcart.model.payment.CreditCard;
+import shoppingcart.model.payment.Payment;
+import shoppingcart.model.payment.Paypal;
 
 public class PaymentFactory {
 	private static PaymentFactory instance = new PaymentFactory();

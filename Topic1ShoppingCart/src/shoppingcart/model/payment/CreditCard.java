@@ -1,4 +1,4 @@
-package shoppingcart.model;
+package shoppingcart.model.payment;
 
 public class CreditCard extends Payment {
 	private String name;

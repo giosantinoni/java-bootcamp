@@ -1,8 +1,8 @@
 package shoppingcart;
 
+import shoppingcart.factory.ItemFactory;
 import shoppingcart.model.ShoppingCart;
 import shoppingcart.model.User;
-import shoppingcart.services.ItemFactory;
 
 public class Test {
 

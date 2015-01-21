@@ -1,4 +1,4 @@
-package shoppingcart.model;
+package shoppingcart.model.payment;
 
 public class Paypal extends Payment {
 	private String email;

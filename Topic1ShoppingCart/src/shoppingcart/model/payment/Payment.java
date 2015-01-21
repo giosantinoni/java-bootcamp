@@ -1,4 +1,4 @@
-package shoppingcart.model;
+package shoppingcart.model.payment;
 
 public abstract class Payment {
 	private double total;

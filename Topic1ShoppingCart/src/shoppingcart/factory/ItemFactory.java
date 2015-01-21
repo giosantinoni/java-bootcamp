@@ -1,4 +1,4 @@
-package shoppingcart.services;
+package shoppingcart.factory;
 
 import java.util.HashMap;
 import java.util.Map;

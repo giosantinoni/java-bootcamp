@@ -3,7 +3,8 @@ package shoppingcart.model;
 import java.util.ArrayList;
 import java.util.List;
 
-import shoppingcart.services.PaymentFactory;
+import shoppingcart.factory.PaymentFactory;
+import shoppingcart.model.payment.Payment;
 
 public class ShoppingCart {
 	private List<Item> items;
