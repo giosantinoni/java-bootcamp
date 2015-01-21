@@ -3,7 +3,7 @@ package shopping.cart.visitor;
 import shopping.cart.interfaces.ShoppingCartVisitor;
 import shopping.cart.items.*;
 
-public class ShoopingCart implements ShoppingCartVisitor {
+public class ShoppingCart implements ShoppingCartVisitor {
 
 	private double total = 0.0;
 
