@@ -14,15 +14,19 @@ public class Client {
 		total = getTotal(items);
 
 		Scanner keyboard = new Scanner(System.in);
+		System.out.println("[1] - Credit Card");
+		System.out.println("[2] - Paypal");
+		System.out.println("[3] - Cash");
+		System.out.println();
 		System.out.println("how you want to pay?");
-		String payOption = keyboard.next();
+		int payOption = keyboard.nextInt();
 
-		if (payOption.equals("credit card")) {
+		if (payOption == 1) {
 			System.out.println("Client: John Doe and Credit Card: 987896576554541234");
-		} else if (payOption.equals("paypal")) {
+		} else if (payOption == 2) {
 			System.out.println("email: johndoe@mail.com and password: JonDow98$");
 		} else {
-			// cash
+			System.out.println("Cash payment");
 		}
 
 		System.out.println("Total: " + total);
@@ -33,11 +37,12 @@ public class Client {
 
 	private static double getTotal(ShoppingCartItem[] items) {
 		ShoppingCartVisitor visitor = new ShoppingCart();
-		int sum = 0;
+		double sum = 0;
 
 		for (ShoppingCartItem item : items) {
 			sum += item.accept(visitor);
 		}
+		return sum;
 	}
 
 }
