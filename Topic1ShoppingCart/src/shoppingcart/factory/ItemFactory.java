@@ -12,9 +12,9 @@ public class ItemFactory {
 	private ItemFactory() {
 		items = new HashMap<String, Item>();
 		
-		items.put("Notebook Dell", new Item("Notebook Dell", 7000));
+		items.put("Notebook Dell", new Item("Notebook Dell", 7200));
 		items.put("Notebook ASUS", new Item("Notebook ASUS", 7000));
-		items.put("TV LG 42", new Item("TV LG 42", 7000));
+		items.put("TV LG 42", new Item("TV LG 42", 6500));
 	}
 	
 	public static ItemFactory getInstance() {

@@ -2,18 +2,24 @@ package shoppingcart.model.payment;
 
 public class CreditCard extends Payment {
 	private String name;
-	private String number;
-	
-	public CreditCard(double total, String name, String number) {
-		super(total);
+	private String creditCardNumber;
+
+	public CreditCard(int number, double total, String name, String creditCardNumber) {
+		super(number, total);
 		this.name = name;
-		this.number = number;
+		this.creditCardNumber = creditCardNumber;
 	}
-	
+
 	public String getName() {
 		return name;
 	}
-	public String getNumber() {
-		return number;
+
+	public String getcreditCardNumber() {
+		return creditCardNumber;
+	}
+
+	@Override
+	public String toString() {
+		return "CreditCard [name=" + name + ", number=" + creditCardNumber + ", " + super.toString() + "]";
 	}
 }
