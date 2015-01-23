@@ -20,11 +20,11 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.border.TitledBorder;
 
 import audioplayer.exceptions.MusicPlayerException;
-import audioplayer.model.MusicPlayer;
+import audioplayer.model.IMusicPlayerFacade;
+import audioplayer.model.MusicPlayerFacade;
 
 public class MainFrame extends JFrame {
-	private MusicPlayer musicPlayer;
-	int n;
+	private IMusicPlayerFacade musicPlayer;
 
 	private JPanel contentPane;
 	private JButton btnPlay;
@@ -60,7 +60,7 @@ public class MainFrame extends JFrame {
 		setTitle("MusicPlayer");
 		initComponents();
 
-		musicPlayer = MusicPlayer.getInstance();
+		musicPlayer = MusicPlayerFacade.getInstance();
 	}
 
 	private void initComponents() {
@@ -136,11 +136,7 @@ public class MainFrame extends JFrame {
 
 	protected void do_btnPlay_actionPerformed(ActionEvent e) {
 		try {
-			if (musicPlayer.getPlayerStatus() != MusicPlayer.PAUSED) {
-				musicPlayer.newPlayer(listSongs.getSelectedValue().toString());
-				musicPlayer.play();
-			} else
-				musicPlayer.resume();
+			musicPlayer.playSong(listSongs.getSelectedValue().toString());
 		} catch (MusicPlayerException ex) {
 			showErrorMessage(ex.getMessage());
 		} catch (NullPointerException ex) {
@@ -149,12 +145,11 @@ public class MainFrame extends JFrame {
 	}
 
 	protected void do_btnStop_actionPerformed(ActionEvent e) {
-		musicPlayer.stop();
-		n = 1;
+		musicPlayer.stopSong();
 	}
 
 	protected void do_btnPause_actionPerformed(ActionEvent e) {
-		musicPlayer.pause();
+		musicPlayer.pauseSong();
 	}
 
 	protected void do_btnSelect_actionPerformed(ActionEvent e) {
@@ -165,7 +160,7 @@ public class MainFrame extends JFrame {
 
 		if (returnVal == JFileChooser.APPROVE_OPTION) {
 			File selectedDir = fc.getSelectedFile();
-			musicPlayer.setDir(selectedDir);
+			musicPlayer.setDirectory(selectedDir);
 			updateUI();
 		}
 	}
@@ -182,7 +177,7 @@ public class MainFrame extends JFrame {
 	}
 
 	private void updateUI() {
-		txtPath.setText(musicPlayer.getDir().toString());
+		txtPath.setText(musicPlayer.getDirectoryPath().toString());
 		updateList();
 	}
 
