@@ -1,0 +1,28 @@
+package topic1;
+
+import productFactory.Product;
+import interfaces.Observer;
+
+public class Manager implements Observer{
+
+	@Override
+	public void doUpdate(Product product) {
+		System.out.println("Item: " + product.getName() + " creation notification sent to Market manager");
+		
+	}
+
+	@Override
+	public void doUpdate(int transactionNumber) {
+		System.out.println("Transaction " + transactionNumber + " notification sent to Market Manager");
+		
+	}
+	
+	@Override
+	public void doUpdate(double price) {
+		System.out.println("Price change notification set to Market Manager");
+		
+	}
+	
+	
+
+}

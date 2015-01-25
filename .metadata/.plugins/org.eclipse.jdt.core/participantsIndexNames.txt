@@ -1,0 +1,13 @@
+INDEX VERSION 1.127
+C:\Bootcamp\java-bootcamp\.metadata\.plugins\org.eclipse.jst.jsp.core\jspsearch\2671939456.index
+\Exercise4Module\src\main\resources
+C:\Bootcamp\java-bootcamp\.metadata\.plugins\org.eclipse.jst.jsp.core\jspsearch\3237343544.index
+\Exercise5\src\main\resources
+C:\Bootcamp\java-bootcamp\.metadata\.plugins\org.eclipse.jst.jsp.core\jspsearch\1196636795.index
+\Exercise4\src\main\resources
+C:\Bootcamp\java-bootcamp\.metadata\.plugins\org.eclipse.jst.jsp.core\jspsearch\1033201783.index
+\Exercise4Mod\src\main\resources
+C:\Bootcamp\java-bootcamp\.metadata\.plugins\org.eclipse.jst.jsp.core\jspsearch\3098273674.index
+\Exercise5\src\main\java
+C:\Bootcamp\java-bootcamp\.metadata\.plugins\org.eclipse.jst.jsp.core\jspsearch\2389432001.index
+\prueba2\src

@@ -1,0 +1,32 @@
+package exercise3;
+
+public class Hospital extends Building {
+	
+	
+	private String hospitalName;
+
+	public String getHospitalName() {
+		return hospitalName;
+	}
+
+	public void setHospitalName(String hospitalName) {
+		this.hospitalName = hospitalName;
+	}
+	
+	public Hospital(String hospitalName){
+		this.hospitalName=hospitalName;
+		
+		RoomBuilder ICWB = new IntensiveCareWardBuilder();
+		RoomBuilder mainHall = new MainHallBuilder();
+		
+		//Creating an Intensive Care Ward
+		RoomDirector roomDirector = new RoomDirector(ICWB);
+		roomDirector.constructRoom();
+		rooms.add(roomDirector.getRoom());
+		
+		//Creating a Main Hall
+		roomDirector= new RoomDirector(mainHall);
+		roomDirector.constructRoom();
+		super.rooms.add(roomDirector.getRoom());
+	}
+}

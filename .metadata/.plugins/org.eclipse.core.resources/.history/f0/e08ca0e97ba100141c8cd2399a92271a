@@ -1,0 +1,80 @@
+package topic1;
+import java.util.ArrayList;
+
+
+public class ShoppingCart implements ShoppingCartVisitor {
+	
+	private ArrayList<Product> productsList;
+	
+	private double totalCost;
+	
+	public ShoppingCart() {
+		productsList = new ArrayList<Product>();
+	}
+	
+	public ArrayList<Product> getProductsList() {
+		return productsList;
+	}
+
+	public void setProductsList(ArrayList<Product> productsList) {
+		this.productsList = productsList;
+	}
+
+	public double getTotalCost() {
+		return totalCost;
+	}
+
+	public void setTotalCost(double totalCost) {
+		this.totalCost = totalCost;
+	}
+
+	@Override
+	public void visit(Item item) {
+		productsList.add(item);
+		System.out.println("Item name: " + item.getItemName() + " $" + item.getItemPrice());
+		totalCost += item.getItemPrice();
+	}
+	
+	@Override
+	public void visit(ArrayList<Product> productsList){
+		for(Product prod: productsList){
+			prod.accept(this);
+		}
+		System.out.println("Total Cost: $" + totalCost);
+	}
+	
+	//Payment methods
+	
+	@Override
+	public String buy() {
+		
+		
+		return "Payment by cash";
+	}
+
+	@Override
+	public String buy(String costumerName, int creditCardNumber) {
+		
+		totalCost = totalCost*(0.9);
+		
+		return "Paid " + totalCost + " with Credit Card";
+	}
+
+	@Override
+	public String buy(String email) {
+		Item i = null;
+		double cheapestPrice=0;
+		
+		for(Product prod: productsList){
+			i = (Item) prod;
+			if(i.getItemPrice()<cheapestPrice) cheapestPrice=i.getItemPrice();
+		}
+		totalCost=totalCost-cheapestPrice;
+		
+		return "Paid " + totalCost + " using Paypal";
+	}
+	
+	
+
+
+}

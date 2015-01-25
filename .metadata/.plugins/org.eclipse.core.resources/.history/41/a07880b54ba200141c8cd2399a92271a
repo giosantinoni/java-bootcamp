@@ -1,0 +1,10 @@
+package interfaces;
+
+import productFactory.Product;
+
+
+public interface Subject {
+	
+	public void doNotify(Product product);
+
+}

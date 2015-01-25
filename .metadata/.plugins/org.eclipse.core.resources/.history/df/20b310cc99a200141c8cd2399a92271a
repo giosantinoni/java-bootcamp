@@ -1,0 +1,101 @@
+package productFactory;
+
+import interfaces.Observer;
+import interfaces.ShoppingCartVisitor;
+
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.Set;
+
+import transactionFactory.Transaction;
+
+public class Offer implements Product {
+
+	private String name;
+	private double price;
+	private ArrayList<Product> offerList;
+	private Set<Observer> offerObservers;
+
+	
+	
+	public Offer(String name, double price, ArrayList<Product> offerList) {
+		this.name = name;
+		this.price = price;
+		this.offerList = offerList;
+	}
+	
+	public Offer(String name, double price, Product product) {
+		this.name = name;
+		this.price = price;
+		this.offerList.add(product);
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public double getPrice() {
+		return price;
+	}
+
+	public void setPrice(double price) {
+		this.price = price;
+	}
+
+	public ArrayList<Product> getOfferList() {
+		return offerList;
+	}
+
+	public void setOfferList(ArrayList<Product> offerList) {
+		this.offerList = offerList;
+	}
+
+	@Override
+	public void accept(ShoppingCartVisitor visitor) {
+		visitor.visit(this);
+	}
+
+	
+	// Subject methods Override
+	@Override
+	public void doNotify(Product product) {
+		Iterator<Observer> iterator = offerObservers.iterator();
+		while(iterator.hasNext()){
+			Observer offerObserver = iterator.next();
+			offerObserver.doUpdate("Price: " + product.getPrice() + " updated");
+		}
+	}
+
+	@Override
+	public void addObserver(Observer observer) {
+		offerObservers.add(observer);
+		
+	}
+
+	@Override
+	public void removeObserver(Observer observer) {
+		offerObservers.remove(observer);
+		
+	}
+
+	@Override
+	public void doNotify(Transaction transaction) {
+		// TODO Auto-generated method stub
+	}
+
+	@Override
+	public void doNotify() {
+		// TODO Auto-generated method stub
+	}
+	
+	
+	
+	
+	
+	
+
+}

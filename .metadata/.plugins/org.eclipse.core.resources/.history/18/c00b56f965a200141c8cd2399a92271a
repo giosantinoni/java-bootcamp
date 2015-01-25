@@ -1,0 +1,62 @@
+package productFactory;
+
+import interfaces.Observer;
+import interfaces.ShoppingCartVisitor;
+import interfaces.Subject;
+
+import java.util.HashSet;
+import java.util.Iterator;
+import java.util.Set;
+
+public class Item implements Product {
+
+	private double price;
+	private String name;
+	private Set<Observer> ItemObservers;
+
+	public Item(String name, double price) {
+		ItemObservers = new HashSet<Observer>();
+		this.name = name;
+		this.price = price;
+	}
+
+	@Override
+	public double getPrice() {
+		return price;
+	}
+
+	@Override
+	public void setPrice(double price) {
+		this.price = price;
+		doNotify(this);
+	}
+	
+	@Override
+	public String getName() {
+		return name;
+	}
+
+	@Override
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	@Override
+	public void accept(ShoppingCartVisitor visitor) {
+		visitor.visit(this);
+	}
+
+
+	// subject methods Override
+	
+	@Override
+	public void doNotify(Product product) {
+		Iterator<Observer> iterator = ItemObservers.iterator();
+		while(iterator.hasNext()){
+			Observer itemObserver = iterator.next();
+			itemObserver.doUpdate("Price: " + product.getPrice() + " updated");
+		}
+	}
+	
+
+}

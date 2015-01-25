@@ -1,0 +1,63 @@
+package implementations;
+
+import java.util.ArrayList;
+
+import productFactory.Item;
+import productFactory.Offer;
+import productFactory.Product;
+import productFactory.ProductFactory;
+import transactionFactory.Transaction;
+import transactionFactory.TransactionFactory;
+
+public class Test {
+
+	public static void main(String args[]) {
+
+		ProductFactory productFactory = ProductFactory.getInstance(); 
+		Manager m1 = new Manager();
+		User user = new User("Carola",1234);
+		productFactory.addObserver(m1);
+		
+		Item tv1 = new Item("LG LED TV", 800);
+		Item tv2 = new Item("Samsung LED", 700);
+		Item phone1 = new Item("HTC Smartphone", 650.2);
+		Item phone2 = new Item("Sony Smartphone", 400);
+		Offer off1 = new Offer("Ciber Monday",350,tv1);
+		
+		productFactory.setProducts(tv1);
+		productFactory.setProducts(tv2);
+		productFactory.setProducts(phone1);
+		productFactory.setProducts(phone2);
+		productFactory.setProducts(off1);
+		
+		ShoppingCart shoppingCart = new ShoppingCart();
+		shoppingCart.setUser(user);
+		
+		
+			try {
+				shoppingCart.visit(productFactory.getProduct("LG LED TV"));
+			} catch (Exception e) {
+				
+				e.printStackTrace();
+			}
+		
+		
+		
+		
+		
+		shoppingCart.visit(tv2);
+		shoppingCart.visit(phone1);
+		shoppingCart.visit(phone2);
+		shoppingCart.visit(off1);
+		
+		TransactionFactory transactionFactory = TransactionFactory.getInstance();
+		transactionFactory.addObserver(m1);
+		
+		//transactionFactory.getTransaction("Cash", shoppingCart);
+		transactionFactory.getTransaction("Cash", shoppingCart);
+		
+		
+		
+		
+	}
+}

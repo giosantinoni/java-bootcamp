@@ -1,0 +1,17 @@
+package interfaces;
+
+import interfaces.ShoppingCartVisitor;
+
+
+public interface Product {
+		
+	public void setName(String name);
+	
+	public void setPrice(double price);
+	
+	public double getPrice();
+	
+	public String getName();
+	
+	public void accept(ShoppingCartVisitor visitor);
+}

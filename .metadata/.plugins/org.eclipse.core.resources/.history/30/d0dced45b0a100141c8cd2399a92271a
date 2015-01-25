@@ -1,0 +1,6 @@
+package topic1;
+
+public interface Product {
+	// public float price=0;
+	public void accept(ShoppingCartVisitor visitor);
+}

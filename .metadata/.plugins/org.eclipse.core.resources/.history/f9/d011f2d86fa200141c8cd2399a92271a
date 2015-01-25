@@ -1,0 +1,44 @@
+package transactionFactory;
+
+import implementations.ShoppingCart;
+import interfaces.Observer;
+
+import java.util.Set;
+
+import productFactory.Product;
+
+public class TransactionFactory {
+
+	private static TransactionFactory transactionFactory;
+	
+		
+	private Set<Observer> transactionFactoryObservers;
+	
+	private TransactionFactory(){
+		
+		
+	}
+	
+	public static TransactionFactory getInstance(){
+		if(transactionFactory == null) {
+			transactionFactory = new TransactionFactory();
+		}
+		return transactionFactory;
+	}
+	
+	public Transaction getTransaction(String transactionType, ShoppingCart shoppingCart) {
+		
+		switch(transactionType){
+			
+		case "creditCard": return new CreditCard(shoppingCart);
+		
+		case "Paypal": return new PayPal(shoppingCart);
+		
+		case default: return new Cash(shoppingCart);
+		}
+		
+	}
+
+	
+	
+}

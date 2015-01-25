@@ -1,0 +1,34 @@
+package topic1;
+
+import java.util.ArrayList;
+
+public class Test {
+
+	public static void main(String args[]) {
+
+		Item tv1 = new Item("LG LED TV", 800);
+		Item tv2 = new Item("Samsung LED", 700);
+		Item phone1 = new Item("HTC Smartphone", 650.2);
+		Item phone2 = new Item("Sony Smartphone", 400);
+		
+		ArrayList<Product> productsList = new ArrayList<Product>();
+		productsList.add(tv1);
+		productsList.add(tv2);
+		productsList.add(phone1);
+		productsList.add(phone2);
+		
+		ArrayList<Product> offerList = new ArrayList<Product>();
+		offerList.add(tv2);
+		offerList.add(phone2);
+		Offer offer1 = new Offer("Ciber Monday",1000,offerList);
+		
+		productsList.add(offer1);
+
+		ShoppingCartVisitor shoppingCart = new ShoppingCart();
+		shoppingCart.visit(productsList);
+		System.out.println(shoppingCart.buy());
+		System.out.println(shoppingCart.buy("marcovciotola@gmail.com"));
+		System.out.println(shoppingCart.buy("Marco", 1234));
+
+	}
+}

@@ -1,0 +1,31 @@
+package exercise3;
+
+public class MainHallBuilder implements RoomBuilder {
+	
+	Room mainHall= new Room();
+	
+	@Override
+	public void buildWall() {
+		mainHall.setWall("Main Hall Walls");
+	}
+	public void buildFloor() {
+		mainHall.setFloor("Main Hall Floor");
+	}
+	public void buildRoof() {
+		mainHall.setRoof("Main Hall Roof");
+	}
+	public void buildDoor() {
+		mainHall.setDoor("Main Hall Doors");
+	}
+	public void buildWindow() {
+		mainHall.setWindow("Main Hall Windows");
+	}
+	public void buildAssingName() {
+		mainHall.setName("Main Hall");
+	}
+	
+	public Room getRoom(){
+		return mainHall;
+	}
+
+}

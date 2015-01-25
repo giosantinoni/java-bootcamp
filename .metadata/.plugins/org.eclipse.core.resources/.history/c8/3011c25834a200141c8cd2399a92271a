@@ -1,0 +1,19 @@
+package topic1;
+
+public class Manager implements Observer{
+
+	@Override
+	public void doUpadate(Product product) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void doUpdate(int transactionNumber) {
+		System.out.println("Transaction " + transactionNumber + " notification sent to Market Manager");
+		
+	}
+	
+	
+
+}
