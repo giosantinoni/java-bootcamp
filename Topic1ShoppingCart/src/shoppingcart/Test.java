@@ -1,19 +1,30 @@
 package shoppingcart;
 
 import shoppingcart.factory.ItemFactory;
+import shoppingcart.factory.PaymentFactory;
 import shoppingcart.item.Offer;
 import shoppingcart.item.Product;
+import shoppingcart.model.Manager;
 import shoppingcart.model.User;
+import shoppingcart.model.interfaces.Observer;
 import shoppingcart.services.IShoppingCartServices;
 import shoppingcart.services.ShoppingCartServices;
 
 public class Test {
 
 	public static void main(String[] args) {
+		Observer manager = new Manager();
+		
 		/*
 		 * Getting Factories
 		 */
 		ItemFactory itemFactory = ItemFactory.getInstance();
+		
+		/*
+		 * Adding Observer
+		 */
+		PaymentFactory.getInstance().addObserver(manager);
+		itemFactory.addObserver(manager);
 
 		/*
 		 * Displaying Products
@@ -35,7 +46,10 @@ public class Test {
 			if (items[i] instanceof Offer)
 				System.out.println(items[i].toString());
 		}
-
+		
+		// Changing a price
+		itemFactory.changeItemPrice("TV LG 42", 7500);
+		
 		/*
 		 * Beginning Services
 		 */
@@ -58,6 +72,7 @@ public class Test {
 		shoppingCartServices.finishSale("Cash", "", "");
 
 		System.out.println(shoppingCartServices.getCurrentShoppingCart());
+		System.out.println();
 
 		/*
 		 * Paypal
@@ -66,7 +81,7 @@ public class Test {
 		shoppingCartServices.newShoppingCart(user2);
 
 		try {
-			shoppingCartServices.addItem(itemFactory.getItem("TV LG 42"));
+			shoppingCartServices.addItem(itemFactory.getItem("DellLG"));
 			shoppingCartServices.addItem(itemFactory.getItem("Notebook Dell"));
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
@@ -75,6 +90,7 @@ public class Test {
 		shoppingCartServices.finishSale("Paypal", "email@email.com", "123456");
 
 		System.out.println(shoppingCartServices.getCurrentShoppingCart());
+		System.out.println();
 
 		/*
 		 * CreditCard
@@ -92,6 +108,24 @@ public class Test {
 		shoppingCartServices.finishSale("CreditCard", user3.getName(), "1234567890");
 
 		System.out.println(shoppingCartServices.getCurrentShoppingCart());
+		System.out.println();
+		
+		/*
+		 * CreditCard 2
+		 */
+		User user4 = new User("Julieta Romero");
+		shoppingCartServices.newShoppingCart(user4);
+
+		try {
+			shoppingCartServices.addItem(itemFactory.getItem("DellLG"));
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+		}
+
+		shoppingCartServices.finishSale("CreditCard", user4.getName(), "1234567890");
+
+		System.out.println(shoppingCartServices.getCurrentShoppingCart());
+		System.out.println();
 
 	}
 

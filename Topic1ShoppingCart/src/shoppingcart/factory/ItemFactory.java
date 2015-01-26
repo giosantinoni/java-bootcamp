@@ -5,23 +5,27 @@ import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
-import shoppingcart.item.Product;
-import shoppingcart.item.Offer;
 import shoppingcart.item.Item;
+import shoppingcart.item.Offer;
+import shoppingcart.item.Product;
+import shoppingcart.model.interfaces.Observer;
+import shoppingcart.model.interfaces.Subject;
 
-public class ItemFactory {
+public class ItemFactory implements Subject {
 	private static ItemFactory instance = new ItemFactory();
 	private Map<String, Item> items;
+	private Set<Observer> observers;
 
 	private ItemFactory() {
+		observers = new HashSet<Observer>();
 		items = new HashMap<String, Item>();
 
 		/*
 		 * Creating Products
 		 */
-		items.put("Notebook Dell", new Product("Notebook Dell", 7200));
-		items.put("Notebook ASUS", new Product("Notebook ASUS", 7000));
-		items.put("TV LG 42", new Product("TV LG 42", 6500));
+		addItem("Notebook Dell", new Product("Notebook Dell", 7200));
+		addItem("Notebook ASUS", new Product("Notebook ASUS", 7000));
+		addItem("TV LG 42", new Product("TV LG 42", 6500));
 
 		/*
 		 * Creating Offers
@@ -35,7 +39,7 @@ public class ItemFactory {
 			e.printStackTrace();
 		}
 
-		items.put(offer.getDescription(), offer);
+		addItem(offer.getDescription(), offer);
 	}
 
 	public static ItemFactory getInstance() {
@@ -45,11 +49,38 @@ public class ItemFactory {
 	public Object[] getItems() {
 		return items.values().toArray();
 	}
+	
+	public void addItem(String key, Item item) {
+		items.put(key, item);
+		doNotify("New Item: " + item.toString());
+	}
+	
+	public void changeItemPrice(String key, double newPrice) {
+		Item item = items.get(key);
+		item.setPrice(newPrice);
+		doNotify("Price changed for Item: " + item.toString());
+	}
 
 	public Item getItem(String itemName) throws Exception {
 		if (items.containsKey(itemName))
 			return items.get(itemName);
 		else
 			throw new Exception("The item " + itemName + " doesn't exist.");
+	}
+
+	@Override
+	public void addObserver(Observer observer) {
+		observers.add(observer);
+	}
+
+	@Override
+	public void removeObserver(Observer observer) {
+		observers.remove(observer);		
+	}
+
+	@Override
+	public void doNotify(String msg) {
+		for (Observer observer: observers)
+			observer.update(msg);
 	}
 }

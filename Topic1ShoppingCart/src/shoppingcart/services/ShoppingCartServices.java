@@ -1,6 +1,5 @@
 package shoppingcart.services;
 
-import shoppingcart.factory.ItemFactory;
 import shoppingcart.item.Item;
 import shoppingcart.model.ShoppingCart;
 import shoppingcart.model.User;
