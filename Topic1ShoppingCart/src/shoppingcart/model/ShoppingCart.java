@@ -1,26 +1,25 @@
 package shoppingcart.model;
 
-import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import shoppingcart.factory.PaymentFactory;
+import shoppingcart.item.Item;
 import shoppingcart.model.payment.Payment;
 
 public class ShoppingCart {
-	private List<Item> items;
+	private Set<Item> items;
 	private User user;
 	private Payment payment;
 
 	public ShoppingCart(User user) {
-		items = new ArrayList<Item>();
+		items = new HashSet<Item>();
 		this.user = user;
 	}
 
 	public void addItem(Item item) throws Exception {
-		if (!items.contains(item))
-			items.add(item);
-		else
-			throw new Exception("The selected item already exists in the current ShoppingCart.");
+		items.add(item);
 	}
 
 	public void finishSale(String paymentType, String data1, String data2) {
@@ -61,11 +60,11 @@ public class ShoppingCart {
 		return total - discount;
 	}
 
-	public List<Item> getItems() {
+	public Set<Item> getItems() {
 		return items;
 	}
 
-	public void setItems(List<Item> items) {
+	public void setItems(Set<Item> items) {
 		this.items = items;
 	}
 

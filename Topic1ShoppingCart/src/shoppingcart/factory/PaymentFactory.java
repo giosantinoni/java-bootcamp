@@ -8,7 +8,7 @@ import shoppingcart.model.payment.Paypal;
 public class PaymentFactory {
 	private static PaymentFactory instance = new PaymentFactory();
 	private int counter;
-
+	
 	private PaymentFactory() {
 		counter = 0;
 	}
@@ -17,7 +17,7 @@ public class PaymentFactory {
 		return instance;
 	}
 
-	public Payment getPayment(String type, double total, String data1, String data2) {
+	public Payment getPayment(String type, double total, String data1, String data2) {		
 		switch (type) {
 		case "CreditCard":
 			return new CreditCard(++counter, total, data1, data2);
