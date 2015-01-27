@@ -18,6 +18,8 @@ public class Test {
 		User user = new User("Carola",1234);
 		productFactory.addObserver(m1);
 		
+		
+		// create items and add observers to some of them
 		Item tv1 = new Item("LG LED TV", 800);
 		tv1.addObserver(m1);
 		Item tv2 = new Item("Samsung LED", 700);
@@ -28,7 +30,7 @@ public class Test {
 		
 		
 		
-		
+		// Add the created items to the shopping List
 		productFactory.setProducts(tv2);
 		productFactory.setProducts(tv1);
 		productFactory.setProducts(phone1);
@@ -38,8 +40,10 @@ public class Test {
 		ShoppingCart shoppingCart = new ShoppingCart();
 		shoppingCart.setUser(user);
 		
+		// changing the price of one item 
 		tv1.setPrice(850);
 		
+		// Shopping some items in the list
 		try {
 			shoppingCart.visit(productFactory.getProduct("LG LED TV"));
 			shoppingCart.visit(productFactory.getProduct("LG LED TV"));
@@ -51,23 +55,13 @@ public class Test {
 		}
 		
 		
-		
-		
-		/*
-		shoppingCart.visit(tv2);
-		shoppingCart.visit(phone1);
-		shoppingCart.visit(phone2);
-		shoppingCart.visit(off1);
-		*/
-			
-		// Transaction Factory deberia recibir un productFactory
-			
+		// Paying for the items
 		TransactionFactory transactionFactory = TransactionFactory.getInstance();
 		transactionFactory.addObserver(m1);
 		
+		transactionFactory.getTransaction("Credit Card", shoppingCart);
 		//transactionFactory.getTransaction("Cash", shoppingCart);
-		//transactionFactory.getTransaction("Credit Card", shoppingCart);
-		transactionFactory.getTransaction("Paypal", shoppingCart);
+		//transactionFactory.getTransaction("Paypal", shoppingCart);
 		
 		
 		

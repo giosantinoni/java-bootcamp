@@ -38,9 +38,5 @@ public class Test {
 			e.printStackTrace();
 		}
 		
-		//Stop Audio File
-		
-		ap.stop();
-		
 	}
 }
