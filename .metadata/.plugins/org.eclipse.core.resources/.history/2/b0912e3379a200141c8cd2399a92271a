@@ -1,0 +1,35 @@
+package transactionFactory;
+
+import productFactory.Product;
+import implementations.ShoppingCart;
+
+public class PayPal extends Transaction {
+
+	
+	private String userName;
+	private String password;
+	
+	public PayPal(ShoppingCart shoppingCart){
+		total=shoppingCart.getTotalCost();
+		transactionNumber++;
+		userName=shoppingCart.getUser().getUser();
+		password=shoppingCart.getUser().getPassword();
+		calculateDiscount(shoppingCart);
+	}
+	
+	@Override
+	public void calculateDiscount(ShoppingCart shoppingCart){
+		Product p = null;
+		double cheapestPrice = 0;
+
+		p =  shoppingCart.getProductsList().get(0);
+		cheapestPrice = p.getPrice();
+
+		for (Product prod : shoppingCart.getProductsList()) {
+			if (prod.getPrice() < cheapestPrice)
+				cheapestPrice = p.getPrice();
+		}
+		totalWithDiscount = total - cheapestPrice;
+
+	}
+}

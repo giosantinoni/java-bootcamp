@@ -1,0 +1,82 @@
+package transactionFactory;
+
+import implementations.ShoppingCart;
+import interfaces.Observer;
+import interfaces.Subject;
+
+import java.util.HashSet;
+import java.util.Iterator;
+import java.util.Set;
+
+import productFactory.Product;
+
+public class TransactionFactory implements Subject {
+
+	private static TransactionFactory transactionFactory;
+
+	private Set<Observer> transactionFactoryObservers;
+
+	private TransactionFactory() {
+		transactionFactoryObservers = new HashSet<Observer>();
+
+	}
+
+	public static TransactionFactory getInstance() {
+		if (transactionFactory == null) {
+			transactionFactory = new TransactionFactory();
+		}
+		return transactionFactory;
+	}
+
+	public Transaction getTransaction(String transactionType, ShoppingCart shoppingCart) {
+
+		switch (transactionType) {
+
+		case "creditCard":
+			return new CreditCard(shoppingCart);
+			
+
+		case "Paypal":
+			return new PayPal(shoppingCart);
+
+		default:
+			return new Cash(shoppingCart);
+			
+			
+		}
+
+	}
+
+	// Subject methods Override
+	@Override
+	public void addObserver(Observer observer) {
+		transactionFactoryObservers.add(observer);
+
+	}
+
+	@Override
+	public void removeObserver(Observer observer) {
+		transactionFactoryObservers.remove(observer);
+
+	}
+
+	@Override
+	public void doNotify(Transaction transaction) {
+		Iterator<Observer> iterator = transactionFactoryObservers.iterator();
+		while (iterator.hasNext()) {
+			Observer transactionFactoryObserver = iterator.next();
+			transactionFactoryObserver.doUpdate("Transaction Nº: " + transaction.getTransactionNumber() + " was completed");
+		}
+	}
+
+	@Override
+	public void doNotify(Product product) {
+		// TODO Auto-generated method stub
+	}
+
+	@Override
+	public void doNotify() {
+		// TODO Auto-generated method stub
+	}
+
+}

@@ -1,0 +1,25 @@
+package topic1;
+
+public class Manager implements Observer{
+
+	@Override
+	public void doUpdate(Product product) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void doUpdate(int transactionNumber) {
+		System.out.println("Transaction " + transactionNumber + " notification sent to Market Manager");
+		
+	}
+	
+	@Override
+	public void doUpdate(double price) {
+		System.out.println("Price change notification set to Market Manager");
+		
+	}
+	
+	
+
+}

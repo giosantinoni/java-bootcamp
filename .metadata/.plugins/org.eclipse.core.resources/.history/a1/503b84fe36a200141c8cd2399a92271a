@@ -1,0 +1,17 @@
+package topic1;
+
+import topic1.ShoppingCartVisitor;
+
+public interface Product {
+	// public float price=0;
+	
+	public void setName(String name);
+	
+	public void setPrice(double price);
+	
+	public double getPrice();
+	
+	public String getName();
+	
+	public void accept(ShoppingCartVisitor visitor);
+}

@@ -1,0 +1,9 @@
+package topic1;
+
+public interface ShoppingCartObserver {
+	
+	public void doUpadate(Product product);
+	
+	public void doUpdate(int transactionNumber);
+
+}

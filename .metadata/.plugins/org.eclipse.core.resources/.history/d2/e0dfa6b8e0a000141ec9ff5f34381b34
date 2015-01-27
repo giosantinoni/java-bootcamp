@@ -1,0 +1,7 @@
+package exercise3;
+
+public class Hospital extends Building {
+	
+	private String hospitalName;
+	
+}

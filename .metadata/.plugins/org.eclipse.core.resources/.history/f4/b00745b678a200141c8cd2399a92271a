@@ -1,0 +1,74 @@
+package implementations;
+
+import interfaces.ShoppingCartVisitor;
+import java.util.ArrayList;
+
+import productFactory.Item;
+import productFactory.Offer;
+import productFactory.Product;
+
+public class ShoppingCart implements ShoppingCartVisitor {
+
+	private User user;
+	
+	private ArrayList<Product> productsList;
+
+	private double totalCost;
+	
+	
+	public ShoppingCart() {
+		productsList = new ArrayList<Product>();
+		totalCost=0;
+	}
+	
+	
+	public ArrayList<Product> getProductsList() {
+		return productsList;
+	}
+
+	public void setProductsList(ArrayList<Product> productsList) {
+		this.productsList = productsList;
+	}
+
+	public double getTotalCost() {
+		return totalCost;
+	}
+
+	public void setTotalCost(double totalCost) {
+		this.totalCost = totalCost;
+	}
+
+	
+	//ShoppingCartVisitor methods override
+	@Override
+	public void visit(Item item) {
+		productsList.add(item);
+		System.out.println("Item name: " + item.getName() + " $" + item.getPrice());
+		totalCost += item.getPrice();
+	}
+
+	@Override
+	public void visit(ArrayList<Product> productsList) {
+		for (Product prod : productsList) {
+			prod.accept(this);
+		}
+		System.out.println("Total Cost: $" + totalCost);
+	}
+	
+	@Override
+	public void visit(Offer offer) {
+		productsList.add(offer);
+		System.out.println("Offer name: " + offer.getName() + " $" + offer.getPrice());
+		totalCost += offer.getPrice();
+	}
+	
+	@Override
+	public void visit(Product product) {
+		productsList.add(product);
+		System.out.println("Product name: " + product.getName() + " $" + product.getPrice());
+		totalCost += product.getPrice();
+	}
+	
+
+
+}

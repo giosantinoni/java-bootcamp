@@ -1,0 +1,18 @@
+package topic1;
+import java.util.ArrayList;
+
+public interface ShoppingCartVisitor {
+	
+	public void visit(Item item);
+	
+	public void visit(ArrayList<Product> productsList);
+	
+	//pay by cash
+	public String buy(ArrayList<Product> producsList);
+	
+	//pay by Credit Card
+	public String buy(ArrayList<Product> productsList,String costumerName, int creditCardNumber);
+	
+	//pay using Paypal
+	public String buy(ArrayList<Product> productsList,String email);
+}

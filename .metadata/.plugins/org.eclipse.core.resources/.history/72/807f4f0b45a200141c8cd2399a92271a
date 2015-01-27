@@ -1,0 +1,11 @@
+package productFactory;
+
+public class ProductFactory {
+	
+	public Product getProduct(String type) {
+		if("Item".equals(type))
+			return new Item();
+		else 
+			return new Offer();
+	}
+}

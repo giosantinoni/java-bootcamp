@@ -1,0 +1,16 @@
+package topic1;
+
+
+public interface Subject {
+	
+	public void addObserver(Observer shoppingCartObserver);
+	
+	public void removeObserver(Observer shoppingCartObserver);
+	
+	public void doNotify();
+	
+	public void doNotify(double priceChange);
+	
+	public void doNotify(Product product);
+
+}

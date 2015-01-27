@@ -1,0 +1,11 @@
+package topic1;
+
+public interface ShoppingCartSubject {
+	
+	public void addObserver(ShoppingCartObserver shoppingCartObserver);
+	
+	public void removeObserver(ShoppingCartObserver shoppingCartObserver);
+	
+	public void doNotify();
+
+}

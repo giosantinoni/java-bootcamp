@@ -1,0 +1,17 @@
+package productFactory;
+
+import interfaces.ShoppingCartVisitor;
+import interfaces.Subject;
+
+public interface Product /*extends Subject*/{
+		
+	public void setName(String name);
+	
+	public void setPrice(double price);
+	
+	public double getPrice();
+	
+	public String getName();
+	
+	public void accept(ShoppingCartVisitor visitor);
+}

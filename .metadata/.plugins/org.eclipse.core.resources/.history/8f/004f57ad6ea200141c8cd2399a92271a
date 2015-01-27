@@ -1,0 +1,20 @@
+package transactionFactory;
+
+import implementations.ShoppingCart;
+
+public class Cash extends Transaction{
+	
+	public Cash(ShoppingCart shoppingCart){
+		total=shoppingCart.getTotalCost();
+		transactionNumber++;
+		calculateDiscount(shoppingCart);
+	}
+	
+	@Override
+	public void calculateDiscount(){
+		
+		
+	}
+	
+
+}

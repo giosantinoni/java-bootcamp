@@ -1,0 +1,19 @@
+
+public class BrickHouseBuilder implements HouseBuilder{
+	
+	private House brickHouse;
+	
+	@Override
+	public void buildWall(){
+		brickHouse.setWall("Brick Wall");
+	}
+	
+	@Override
+	public void buildFloor(){
+		brickHouse.setFloor("Brick Floor");
+	}
+	
+	@Override
+	public void
+
+}

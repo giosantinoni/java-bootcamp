@@ -1,0 +1,111 @@
+package topic1;
+
+import java.util.ArrayList;
+
+public class ShoppingCart implements ShoppingCartVisitor {
+
+	private ArrayList<Product> productsList;
+
+	private double totalCost;
+	private double totalWithDiscount;
+
+	public ShoppingCart() {
+		productsList = new ArrayList<Product>();
+		setTotalCost(0);
+		setTotalWithDiscount(0);
+	
+	}
+
+	
+	
+	public double getTotalWithDiscount() {
+		return totalWithDiscount;
+	}
+
+
+
+	public void setTotalWithDiscount(double totalWithDiscount) {
+		this.totalWithDiscount = totalWithDiscount;
+	}
+
+
+
+	public ArrayList<Product> getProductsList() {
+		return productsList;
+	}
+
+	public void setProductsList(ArrayList<Product> productsList) {
+		this.productsList = productsList;
+	}
+
+	public double getTotalCost() {
+		return totalCost;
+	}
+
+	public void setTotalCost(double totalCost) {
+		this.totalCost = totalCost;
+	}
+
+	@Override
+	public void visit(Item item) {
+		productsList.add(item);
+		System.out.println("Item name: " + item.getItemName() + " $" + item.getItemPrice());
+		totalCost += item.getItemPrice();
+	}
+
+	@Override
+	public void visit(ArrayList<Product> productsList) {
+		for (Product prod : productsList) {
+			prod.accept(this);
+		}
+		System.out.println("Total Cost: $" + totalCost);
+	}
+
+	// Payment methods
+
+	// Credit Card
+	@Override
+	public String buy(String costumerName, int creditCardNumber) {
+
+		totalCost = totalCost * (0.9);
+
+		return "Paid " + totalCost + " with Credit Card";
+	}
+
+	// PayPal
+	@Override
+	public String buy(String email) {
+		Item i = null;
+		double cheapestPrice = 0;
+
+		for (Product prod : productsList) {
+			i = (Item) prod;
+			cheapestPrice = i.getItemPrice();
+			if (i.getItemPrice() < cheapestPrice)
+				cheapestPrice = i.getItemPrice();
+		}
+		totalWithDiscount = totalCost - cheapestPrice;
+
+		return "Paid " + totalWithDiscount + " using Paypal";
+	}
+
+	// Cash
+	@Override
+	public String buy() {
+		Item i = null;
+		double expensivePrice = 0;
+
+		for (Product prod : productsList) {
+			i = (Item) prod;
+			expensivePrice = i.getItemPrice();
+			if (i.getItemPrice() > expensivePrice)
+				expensivePrice = i.getItemPrice();
+		}
+
+		expensivePrice = expensivePrice * (0.9);
+		totalCost = totalCost - expensivePrice;
+
+		return "Paid " + totalCost + " by cash";
+	}
+
+}

@@ -1,0 +1,16 @@
+package interfaces;
+
+import productFactory.Product;
+
+
+public interface Subject {
+	
+	public void addObserver(Observer shoppingCartObserver);
+	
+	public void removeObserver(Observer shoppingCartObserver);
+	
+	public void doNotify();
+	
+	public void doNotify(Product product);
+
+}

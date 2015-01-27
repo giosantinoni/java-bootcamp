@@ -1,0 +1,16 @@
+package exercise7;
+
+
+public class Test {
+
+	public static void main(String[] args){
+		
+		AudioPlayer ap = new AudioPlayer();
+		String filePath = "C:/Sounds/wavSample.wav";
+		//System.out.println(filePath);
+		
+		
+		ap.load(filePath);
+		
+	}
+}
