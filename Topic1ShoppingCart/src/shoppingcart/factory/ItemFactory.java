@@ -1,0 +1,86 @@
+package shoppingcart.factory;
+
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Map;
+import java.util.Set;
+
+import shoppingcart.item.Item;
+import shoppingcart.item.Offer;
+import shoppingcart.item.Product;
+import shoppingcart.model.interfaces.Observer;
+import shoppingcart.model.interfaces.Subject;
+
+public class ItemFactory implements Subject {
+	private static ItemFactory instance = new ItemFactory();
+	private Map<String, Item> items;
+	private Set<Observer> observers;
+
+	private ItemFactory() {
+		observers = new HashSet<Observer>();
+		items = new HashMap<String, Item>();
+
+		/*
+		 * Creating Products
+		 */
+		addItem("Notebook Dell", new Product("Notebook Dell", 7200));
+		addItem("Notebook ASUS", new Product("Notebook ASUS", 7000));
+		addItem("TV LG 42", new Product("TV LG 42", 6500));
+
+		/*
+		 * Creating Offers
+		 */
+		Offer offer = new Offer("DellLG", 8000);
+		try {
+			offer.addItem(getItem("Notebook ASUS"));
+			offer.addItem(getItem("TV LG 42"));
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		addItem(offer.getDescription(), offer);
+	}
+
+	public static ItemFactory getInstance() {
+		return instance;
+	}
+
+	public Object[] getItems() {
+		return items.values().toArray();
+	}
+	
+	public void addItem(String key, Item item) {
+		items.put(key, item);
+		doNotify("New Item: " + item.toString());
+	}
+	
+	public void changeItemPrice(String key, double newPrice) {
+		Item item = items.get(key);
+		item.setPrice(newPrice);
+		doNotify("Price changed for Item: " + item.toString());
+	}
+
+	public Item getItem(String itemName) throws Exception {
+		if (items.containsKey(itemName))
+			return items.get(itemName);
+		else
+			throw new Exception("The item " + itemName + " doesn't exist.");
+	}
+
+	@Override
+	public void addObserver(Observer observer) {
+		observers.add(observer);
+	}
+
+	@Override
+	public void removeObserver(Observer observer) {
+		observers.remove(observer);		
+	}
+
+	@Override
+	public void doNotify(String msg) {
+		for (Observer observer: observers)
+			observer.update(msg);
+	}
+}
