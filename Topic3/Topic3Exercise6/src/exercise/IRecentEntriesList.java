@@ -19,5 +19,7 @@ public interface IRecentEntriesList {
 	void updateEntry(int index, Entry entry);
 
 	List<Entry> getList();
+	
+	Entry getEntryByTag(String tag);
 
 }

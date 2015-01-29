@@ -1,5 +1,6 @@
 package exercise;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class BlogService implements IBlogService {
@@ -15,8 +16,8 @@ public class BlogService implements IBlogService {
 	}
 
 	@Override
-	public void addNewEntry(String title, String body) {
-		recentEntries.addNewEntry(new Entry(title, body));
+	public void addNewEntry(String title, String body, String tag) {
+		recentEntries.addNewEntry(new Entry(title, body, tag));
 	}
 
 	@Override
@@ -28,14 +29,29 @@ public class BlogService implements IBlogService {
 	}
 
 	@Override
-	public void updateEntry(int index, String title, String body) {
-		Entry entry = new Entry(title, body);
+	public void updateEntry(int index, String title, String body, String tag) {
+		Entry entry = new Entry(title, body, tag);
 		recentEntries.updateEntry(index, entry);		
 	}
 
 	@Override
 	public List<Entry> getRecentEntries() {
 		return recentEntries.getList();
+	}
+
+	@Override
+	public List<String> getTagList() {
+		List<String> tagList = new ArrayList<String>();
+		
+		for (Entry entry: getRecentEntries())
+			tagList.add(entry.getTag());
+		
+		return tagList;
+	}
+
+	@Override
+	public Entry getEntryByTag(String tag) {		
+		return recentEntries.getEntryByTag(tag);
 	}
 
 }

@@ -33,7 +33,7 @@ public class RecentEntriesListTest {
 	public void testAddNewEntry() {
 		entriesList.setList(mockedList);
 
-		Entry entry = new Entry("title", "body");
+		Entry entry = new Entry("title", "body", "tag");
 
 		entriesList.addNewEntry(entry);
 
@@ -42,8 +42,8 @@ public class RecentEntriesListTest {
 
 	@Test
 	public void testRemoveEntry() {
-		Entry entry1 = new Entry("title1", "body1");
-		Entry entry2 = new Entry("title2", "body2");
+		Entry entry1 = new Entry("title1", "body1", "tag1");
+		Entry entry2 = new Entry("title2", "body2", "tag2");
 
 		entriesList.addNewEntry(entry1);
 		entriesList.addNewEntry(entry2);
@@ -57,7 +57,7 @@ public class RecentEntriesListTest {
 
 	@Test
 	public void testUpdateEntry() {
-		Entry entry1 = new Entry("title1", "body1");
+		Entry entry1 = new Entry("title1", "body1", "tag1");
 
 		entriesList.addNewEntry(entry1);
 
@@ -74,23 +74,36 @@ public class RecentEntriesListTest {
 
 	@Test
 	public void testFullEntriesList() {
-		Entry entry2 = new Entry("title2", "body2");
+		Entry entry2 = new Entry("title2", "body2", "tag2");
 
-		entriesList.addNewEntry(new Entry("title1", "body1"));
+		entriesList.addNewEntry(new Entry("title1", "body1", "tag1"));
 		entriesList.addNewEntry(entry2);
-		entriesList.addNewEntry(new Entry("title3", "body3"));
-		entriesList.addNewEntry(new Entry("title4", "body4"));
-		entriesList.addNewEntry(new Entry("title5", "body5"));
-		entriesList.addNewEntry(new Entry("title6", "body6"));
-		entriesList.addNewEntry(new Entry("title7", "body7"));
-		entriesList.addNewEntry(new Entry("title8", "body8"));
-		entriesList.addNewEntry(new Entry("title9", "body9"));
-		entriesList.addNewEntry(new Entry("title10", "body10"));
-		entriesList.addNewEntry(new Entry("title11", "body11"));
+		entriesList.addNewEntry(new Entry("title3", "body3", "tag1"));
+		entriesList.addNewEntry(new Entry("title4", "body4", "tag1"));
+		entriesList.addNewEntry(new Entry("title5", "body5", "tag1"));
+		entriesList.addNewEntry(new Entry("title6", "body6", "tag1"));
+		entriesList.addNewEntry(new Entry("title7", "body7", "tag1"));
+		entriesList.addNewEntry(new Entry("title8", "body8", "tag1"));
+		entriesList.addNewEntry(new Entry("title9", "body9", "tag1"));
+		entriesList.addNewEntry(new Entry("title10", "body10", "tag1"));
+		entriesList.addNewEntry(new Entry("title11", "body11", "tag1"));
 
 		Entry result = entriesList.getEntry(0);
 
 		assertEquals(entry2, result);
+	}
+	
+	@Test
+	public void testGetEntryByTag() {
+		Entry entry1 = new Entry("title1", "body1", "tag1");
+		Entry entry2 = new Entry("title2", "body2", "tag2");
+		
+		entriesList.addNewEntry(entry1);
+		entriesList.addNewEntry(entry2);
+		
+		Entry result = entriesList.getEntryByTag(entry1.getTag());
+		
+		assertEquals(entry1, result);
 	}
 
 }

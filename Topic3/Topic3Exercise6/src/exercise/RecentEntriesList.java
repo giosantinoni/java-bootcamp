@@ -58,4 +58,12 @@ public class RecentEntriesList implements IRecentEntriesList {
 		return list;
 	}
 
+	@Override
+	public Entry getEntryByTag(String tag) {		
+		for (Entry entry: list)
+			if (entry.getTag() == tag)
+				return entry;
+		return null;
+	}
+
 }
