@@ -36,6 +36,9 @@ public class Demo {
 		System.out.println("\tNo information required");
 		System.out.println("\tTotal to pay with cash: " + cart.getTotalPriceCash());
 
+		// displaying information
+		cart.displayInfoOfItems();
+
 	}
 
 }

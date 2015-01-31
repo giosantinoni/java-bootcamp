@@ -10,6 +10,7 @@ public class ShoppingCart {
 	private CashPaymentVisitor cashPaymentVisitor;
 	private PayalPaymentVisitor ppPaymentVisitor;
 	private CCPaymentVisitor ccPaymentVisitor;
+	private DisplayItemVisitor infoItemVisitor;
 
 	public ShoppingCart() {
 		this.items 					= new ArrayList<IItem>();
@@ -17,6 +18,7 @@ public class ShoppingCart {
 		this.ccPaymentVisitor 		= new CCPaymentVisitor();
 		this.ppPaymentVisitor 		= new PayalPaymentVisitor();
 		this.cashPaymentVisitor 	= new CashPaymentVisitor();
+		this.infoItemVisitor		= new DisplayItemVisitor();
 	}
 
 	public void addItem(IItem item) {
@@ -49,5 +51,11 @@ public class ShoppingCart {
 			item.accept(cashPaymentVisitor);
 		}
 		return cashPaymentVisitor.getTotalPrice();
+	}
+	
+	public void displayInfoOfItems() {
+		for (IItem item : items) {
+			item.accept(infoItemVisitor);
+		}
 	}
 }
