@@ -23,13 +23,21 @@ public class Demo {
 		System.out.println("Total to pay: " + cart.getTotalPrice());
 		
 		// credit card payment.
-		System.out.println("Total to pay with cc : " + cart.getTotalPriceCC());
+		System.out.println("Credit Card Payment:");
+		System.out.println("\tClient name: " + john.getName());
+		System.out.println("\tCC number: " + john.getCc());
+		System.out.println("\tTotal to pay with cc : " + cart.getTotalPriceCC());
 		
 		// paypal payment
-		System.out.println("Total to pay with paypal: " + cart.getTotalPricePaypal());
+		System.out.println("Paypal Payment:");
+		System.out.println("\tClient email: " + john.getEmail());
+		System.out.println("\tEmail password: " + john.getEmailPass());
+		System.out.println("\tTotal to pay with paypal: " + cart.getTotalPricePaypal());
 		
 		// cash payment;
-		System.out.println("Total to pay with cash: " + cart.getTotalPriceCash());
+		System.out.println("Credit Card Payment:");
+		System.out.println("\tNo information required");
+		System.out.println("\tTotal to pay with cash: " + cart.getTotalPriceCash());
 	}
 
 }
