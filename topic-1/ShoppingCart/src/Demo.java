@@ -1,4 +1,5 @@
 import implementations.products.*;
+import services.*;
 
 public class Demo {
 
@@ -38,6 +39,19 @@ public class Demo {
 
 		// displaying information
 		cart.displayInfoOfItems();
+		
+		// Offers
+		System.out.println("");
+		cart.addItemToOffer(new Computer("Dell",15000.00));
+		cart.addItemToOffer(new Tablet("Xoom", 5000.00));
+		
+		Offer anotherOffer = new Offer("0002", 40000.00);
+		anotherOffer.addItem(new Computer("iMac", 25000.00));
+		anotherOffer.addItem(new Tablet("iPad", 20000.00));
+		
+		cart.addOfferToOffer(anotherOffer);
+		
+		cart.displayInformationOfOffers();
 
 	}
 
