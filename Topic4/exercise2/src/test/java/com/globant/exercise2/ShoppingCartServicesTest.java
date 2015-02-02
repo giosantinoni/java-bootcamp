@@ -40,7 +40,7 @@ public class ShoppingCartServicesTest {
 	public void setUp() throws Exception {
 		itemFactory = mock(ItemFactory.class);
 
-		user1 = new User("Juan Perez");
+		user1 = new User(1, "Juan Perez");
 		item1 = new Product("product1", 500);
 		item2 = new Product("product2", 400);
 

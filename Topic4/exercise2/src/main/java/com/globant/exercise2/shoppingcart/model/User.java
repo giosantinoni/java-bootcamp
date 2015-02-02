@@ -6,14 +6,32 @@ package com.globant.exercise2.shoppingcart.model;
  *
  */
 public class User {
+	private int id;
 	private String name;
-	
+
+	/**
+	 * Class constructor.
+	 */
+	public User() {
+	}
+
 	/**
 	 * Class constructor.
 	 * 
 	 * @param name
 	 */
 	public User(String name) {
+		this.name = name;
+	}
+
+	/**
+	 * Class constructor.
+	 * 
+	 * @param id
+	 * @param name
+	 */
+	public User(int id, String name) {
+		this.id = id;
 		this.name = name;
 	}
 
@@ -29,5 +47,17 @@ public class User {
 	 */
 	public String getName() {
 		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
 	}
 }
