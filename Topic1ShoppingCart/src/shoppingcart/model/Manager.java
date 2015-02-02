@@ -2,6 +2,11 @@ package shoppingcart.model;
 
 import shoppingcart.model.interfaces.Observer;
 
+/**
+ * 
+ * @author martin
+ *
+ */
 public class Manager implements Observer {
 
 	@Override
