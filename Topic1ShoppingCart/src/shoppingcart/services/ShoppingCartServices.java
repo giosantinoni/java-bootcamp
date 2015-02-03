@@ -4,6 +4,11 @@ import shoppingcart.item.Item;
 import shoppingcart.model.ShoppingCart;
 import shoppingcart.model.User;
 
+/**
+ * 
+ * @author martin
+ *
+ */
 public class ShoppingCartServices implements IShoppingCartServices {
 	private ShoppingCart currentShoppingCart;
 
