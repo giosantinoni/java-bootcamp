@@ -75,4 +75,14 @@ public class UserService implements IUserService {
 		userDAO.update(user);
 		userDAO.update(friend);		
 	}
+
+	@Override
+	public void addLike(int userId, int friendId, String filePath) throws ShoppingCartException {
+		User user = getUser(userId);
+		User friend = getUser(friendId);
+		
+		friend.addLikeToPhoto(user, filePath);
+		
+		userDAO.update(friend);		
+	}
 }

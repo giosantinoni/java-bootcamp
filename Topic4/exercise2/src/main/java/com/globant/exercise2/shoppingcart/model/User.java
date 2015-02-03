@@ -1,6 +1,8 @@
 package com.globant.exercise2.shoppingcart.model;
 
+import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Map;
 import java.util.Set;
 
 /**
@@ -11,7 +13,7 @@ import java.util.Set;
 public class User {
 	private int id;
 	private String name;
-	private Set<Photo> photos = new HashSet<Photo>();
+	private Map<String, Photo> photos = new HashMap<String, Photo>();
 	private Set<User> friends = new HashSet<User>();
 
 	/**
@@ -39,13 +41,24 @@ public class User {
 		this.id = id;
 		this.name = name;
 	}
-	
+
+	/**
+	 * Adds a new photo.
+	 * 
+	 * @param photo
+	 */
 	public void addPhoto(Photo photo) {
-		photos.add(photo);
+		photos.put(photo.getFilePath(), photo);
 	}
-	
+
 	public void addFriend(User user) {
 		friends.add(user);
+	}
+	
+	public void addLikeToPhoto(User friend, String filePath) {
+		Photo photo = photos.get(filePath);
+		photo.addLike(friend);
+		photos.put(filePath, photo);
 	}
 
 	@Override
@@ -74,11 +87,11 @@ public class User {
 		this.id = id;
 	}
 
-	public Set<Photo> getPhotos() {
+	public Map<String, Photo> getPhotos() {
 		return photos;
 	}
 
-	public void setPhotos(Set<Photo> photos) {
+	public void setPhotos(Map<String, Photo> photos) {
 		this.photos = photos;
 	}
 
@@ -88,5 +101,5 @@ public class User {
 
 	public void setFriends(Set<User> friends) {
 		this.friends = friends;
-	}
+	}	
 }

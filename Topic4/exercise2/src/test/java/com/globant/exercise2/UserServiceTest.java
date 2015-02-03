@@ -44,6 +44,8 @@ public class UserServiceTest {
 		user1 = new User(1, "Homer Simpson");
 		user2 = new User(2, "Marge Simpson");
 		photo1 = new Photo("path/photo1.png");
+		
+		user2.addPhoto(photo1);
 
 		when(userDAOMock.get(1)).thenReturn(user1);
 		when(userDAOMock.get(2)).thenReturn(user2);
@@ -159,6 +161,20 @@ public class UserServiceTest {
 		}
 		 
 		 verify(userDAOMock).update(user1);
+		 verify(userDAOMock).update(user2);
+	 }
+	 
+	 @Test
+	 public void testAddLike() {
+		 userService.setUserDAO(userDAOMock);
+		 
+		 try {
+			userService.addLike(1, 2, "path/photo1.png");
+		} catch (ShoppingCartException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		 
 		 verify(userDAOMock).update(user2);
 	 }
 	

@@ -30,4 +30,6 @@ public interface IUserService {
 	void uploadPhoto(int id, Photo photo) throws ShoppingCartException;
 
 	void addFriend(int userId, int friendId) throws ShoppingCartException;
+	
+	void addLike(int userId, int friendId, String filePath) throws ShoppingCartException;
 }
