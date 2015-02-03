@@ -16,7 +16,7 @@ import com.globant.exercise2.shoppingcart.model.item.Product;
  * @author martin
  *
  */
-public class ItemFactory implements Subject {
+public class ItemFactory implements Subject  {
 	private static ItemFactory instance = new ItemFactory();
 	private Map<String, Item> items;
 	private Set<Observer> observers;
@@ -104,17 +104,14 @@ public class ItemFactory implements Subject {
 			throw new Exception("The item " + itemName + " doesn't exist.");
 	}
 
-	@Override
 	public void addObserver(Observer observer) {
 		observers.add(observer);
 	}
 
-	@Override
 	public void removeObserver(Observer observer) {
 		observers.remove(observer);
 	}
-
-	@Override
+	
 	public void doNotify(String msg) {
 		for (Observer observer : observers)
 			observer.update(msg);

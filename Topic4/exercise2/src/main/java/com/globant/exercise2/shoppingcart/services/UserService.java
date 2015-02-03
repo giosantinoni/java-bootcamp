@@ -8,6 +8,8 @@ import org.springframework.stereotype.Service;
 import com.globant.exercise2.shoppingcart.dao.IUserDAO;
 import com.globant.exercise2.shoppingcart.dao.UserDAO;
 import com.globant.exercise2.shoppingcart.exception.ShoppingCartException;
+import com.globant.exercise2.shoppingcart.model.Photo;
+import com.globant.exercise2.shoppingcart.model.ShoppingCart;
 import com.globant.exercise2.shoppingcart.model.User;
 
 @Service
@@ -34,7 +36,8 @@ public class UserService implements IUserService {
 	@Override
 	public void updateUser(User user) throws ShoppingCartException {
 		User userToUpdate = getUser(user.getId());
-		userToUpdate.setName(user.getName());		
+		userToUpdate.setName(user.getName());
+		userToUpdate.setPhotos(user.getPhotos());
 		userDAO.update(user);
 	}
 
@@ -47,5 +50,29 @@ public class UserService implements IUserService {
 	@Override
 	public List<User> getUsers() {
 		return userDAO.getAll();
+	}
+
+	@Override
+	public void setUserDAO(IUserDAO userDAO) {
+		this.userDAO = userDAO;
+	}
+
+	@Override
+	public void uploadPhoto(int id, Photo photo) throws ShoppingCartException {
+		User user = getUser(id);
+		user.addPhoto(photo);
+		userDAO.update(user);
+	}
+
+	@Override
+	public void addFriend(int userId, int friendId) throws ShoppingCartException {
+		User user = getUser(userId);
+		User friend = getUser(friendId);
+		
+		user.addFriend(friend);
+		friend.addFriend(user);
+		
+		userDAO.update(user);
+		userDAO.update(friend);		
 	}
 }

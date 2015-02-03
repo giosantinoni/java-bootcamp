@@ -4,7 +4,7 @@ import java.util.List;
 
 import com.globant.exercise2.shoppingcart.model.User;
 
-public interface IUserDAO {
+public interface IUserDAO {	
 
 	void add(User user);
 
