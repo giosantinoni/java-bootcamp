@@ -3,13 +3,13 @@ package exercise6;
 public class Entry {
 	
 	private String title;
-	private String body;
+	private String text;
 	private String tag;
 	
 	public Entry(String title, String body, String tag) {
 		super();
 		this.title = title;
-		this.body = body;
+		this.text = body;
 		this.tag = tag;
 	}
 	
@@ -19,11 +19,11 @@ public class Entry {
 	public void setTitle(String title) {
 		this.title = title;
 	}
-	public String getBody() {
-		return body;
+	public String getText() {
+		return text;
 	}
-	public void setBody(String body) {
-		this.body = body;
+	public void setText(String text) {
+		this.text = text;
 	}
 	public String getTag() {
 		return tag;
@@ -34,7 +34,7 @@ public class Entry {
 
 	@Override
 	public String toString() {
-		return "Entry [title=" + title + ", body=" + body + ", tag=" + tag + "]";
+		return "Entry [title=" + title + ", text=" + text + ", tag=" + tag + "]";
 	}
 	
 }

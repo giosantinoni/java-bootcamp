@@ -18,11 +18,19 @@ public class _RomanNumbers {
 		System.out.println("Ending");
 	}
 	
+
 	@Test
 	public void IntToRomanTest() {
 		RomanNumbers toRoman = new RomanNumbers();
 		int number= 1212;
 		String string = toRoman.IntToRoman(number);
 		System.out.println(string);
+		assertEquals("MCCXII", string);
 	}
-}
+	@Test
+	public void RomanToIntTest() {
+		RomanNumbers toInt = new RomanNumbers();
+		int integ = toInt.RomanToInt("MCCXII");
+		System.out.println(integ);
+		assertEquals(1212, integ);
+	}}
