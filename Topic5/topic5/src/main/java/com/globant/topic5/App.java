@@ -15,8 +15,6 @@ import com.globant.topic5.model.Teacher;
  */
 public class App {
 	public static void main(String[] args) {
-		List<Course> courses = new ArrayList<Course>();
-
 		MySQLConnection conn = new MySQLConnection();
 
 		/*
@@ -106,7 +104,32 @@ public class App {
 			System.out.println("Course: " + courseName);
 			while (rs.next()) {
 				System.out.println("Passed: " + rs.getFloat("passed"));
-				System.out.println("Passed: " + rs.getFloat("failed"));
+				System.out.println("Failed: " + rs.getFloat("failed"));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			conn.close();
+		}
+		
+		
+		/*
+		 * Exercise 7
+		 */
+		conn.init();
+		int teacherId = 1;
+		rs = conn.getTeacherTimeLine(teacherId);
+		try {
+			boolean flag = true;
+			while (rs.next()) {
+				
+				if (flag) {
+					System.out.println("Teacher: " + rs.getString("lastName") + ", " + rs.getString("firstName"));
+					System.out.println("Schedule: ");
+					flag = false;
+				}				
+				
+				System.out.println("\t" + rs.getString("s.day") + " " + rs.getString("s.startTime") + " - " + rs.getString("s.endTime") + " " + rs.getString("c.name"));
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
