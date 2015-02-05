@@ -2,12 +2,8 @@ package com.globant.topic5;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.List;
 
 import com.globant.topic5.dbmanagement.MySQLConnection;
-import com.globant.topic5.model.Course;
-import com.globant.topic5.model.Teacher;
 
 /**
  * Hello world!
