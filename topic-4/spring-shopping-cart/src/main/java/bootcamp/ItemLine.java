@@ -12,6 +12,13 @@ public class ItemLine {
 	public ArrayList<IProduct> getItems() {
 		return items;
 	}
+	
+	public void calculateTotal() {
+		for (IProduct product : items) {
+			this.totalAmount += product.getPrice();
+		}
+		this.totalAmount += offer.getPrice();
+	}
 
 	public void setItems(ArrayList<IProduct> items) {
 		this.items = items;
