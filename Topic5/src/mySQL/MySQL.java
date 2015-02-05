@@ -64,6 +64,7 @@ public class MySQL {
 		      }
 	  }
 	  
+	  
 	  public void finalNotesList(String lastName) throws SQLException{
 		  System.out.println("Creating statement...");
 		  ResultSet rs = conn.createStatement().executeQuery("call listFinalNotes_StudentLastName(\""+lastName+"\");");

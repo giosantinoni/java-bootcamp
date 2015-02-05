@@ -24,5 +24,6 @@ public class _Soundex {
 	    Soundex soundex = new Soundex();
         String sound = soundex.SoundexConverter(string);
         System.out.println("\""+ string + "\" in soundex codification is: " + sound);
+        assertEquals("H400", sound);
 	}
 }

@@ -19,23 +19,58 @@ public class _WordWrapping {
 	public void tearDown() throws Exception {
 		System.out.println("Ending");
 	}
+	
+	@Test
+	public void wordWrapping1Test(){
+		WordWrapping ww = new WordWrapping();
+		String testString= "0123456789ABCDEF0123456789ABCD";
+		int rowLength= 60;
+		ArrayList<String> list = new ArrayList<String>();
+		list = ww.wordWrap(testString,rowLength);
+		ArrayList<String> expectedList =new ArrayList<String>();
+		expectedList.add("\"0123456789ABCDEF0123456789ABCD\" ");
+		
+		assertEquals(expectedList, list);
+	}
+	
+	@Test
+	public void wordWrapping2Test(){
+		WordWrapping ww = new WordWrapping();
+		String testString= "Hello world!";
+		int rowLength= 7;
+		ArrayList<String> list = new ArrayList<String>();
+		list = ww.wordWrap(testString,rowLength);
+		ArrayList<String> expectedList =new ArrayList<String>();
+		expectedList.add("\"Hello\" ");
+		expectedList.add("\"world!\" ");
+		assertEquals(expectedList, list);
+	}
 
 	@Test
-	public void wordWrappingtest() {
-		//fail("Not yet implemented");
+	public void wordWrapping3test() {
 		
-		WordWrapping ww = new WordWrapping();
-		
+		WordWrapping ww = new WordWrapping();		
 		ArrayList<String> list = new ArrayList<String>();
-		
 		String testString = "a b c d e f";
-		
 		int rowLength=3;
-		
 		list = ww.wordWrap(testString,rowLength);
-				
-		for (int i = 0; i < list.size(); i++){
-			System.out.println(list.get(i));
-		}
+		ArrayList<String> expectedList =new ArrayList<String>();
+		expectedList.add("\"a b\" ");
+		expectedList.add("\"c d\" ");
+		expectedList.add("\"e f\" ");
+		assertEquals(expectedList, list);
 	}
-}
+	@Test
+	
+	public void wordWrapping4test() {
+		
+		WordWrapping ww = new WordWrapping();		
+		ArrayList<String> list = new ArrayList<String>();
+		String testString = "Excelent";
+		int rowLength=5;
+		list = ww.wordWrap(testString,rowLength);
+		ArrayList<String> expectedList =new ArrayList<String>();
+		expectedList.add("\"Excel\" ");
+		expectedList.add("\"ent\" ");
+		assertEquals(expectedList, list);
+	}}

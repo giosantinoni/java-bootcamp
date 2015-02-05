@@ -10,56 +10,82 @@ public class _Blog {
 
 	@Before
 	public void setUp() throws Exception {
-		System.out.println("Starting");
+		System.out.println("start of test");
 	}
 
 	@After
 	public void tearDown() throws Exception {
-		System.out.println("Ending");
+		System.out.println("end of test");
 	}
-
+	
 	@Test
-	public void test() {
-		//Creating a Blong and some entries
+	public void BlogEntryTest() {
+		
+		//add a new entry
 		Blog blog = new Blog();
-		Entry e1 = new Entry("Entry 1 Title","Entry 1 body","Entry 1 Tag");
-		Entry e2 = new Entry("Entry 2 Title","Entry 2 body","Entry 2 Tag");
-		Entry e3 = new Entry("Entry 3 Title","Entry 3 body","Entry 3 Tag");
-		Entry e4 = new Entry("Entry 4 Title","Entry 4 body","Entry 4 Tag");
-		Entry e5 = new Entry("Entry 5 Title","Entry 5 body","Entry 5 Tag");
-		Entry e6 = new Entry("Entry 6 Title","Entry 6 body","Entry 6 Tag");
-		Entry e7 = new Entry("Entry 7 Title","Entry 7 body","Entry 7 Tag");
-		
-		// posting entries
-		blog.post(e1);
-		blog.post(e2);
-		blog.post(e3);
-		blog.post(e4);
-		blog.post(e5);
-		blog.post(e6);
-		blog.post(e7);
-		
-		//showing recent entries
-		blog.recentEntryList.Show();
-		
-		// showing all entries' tags
-		blog.showAllTags();
-		
-		e3.setTag("Entry 1 new Tag");
-		e4.setTag("Entry 1 new Tag");
-		e5.setTag("Entry 1 new Tag");
-		
-		// updating entries
-		blog.update(e3);
-		blog.update(e4);
-		blog.update(e5);
-		
-		//blog.delete("Title");
-		
-		blog.recentEntryList.Show();
-		//showing entries with an specific tag
-		blog.entrySearch("Entry 1 new Tag");
-		
+		blog.PostEntry("hello","hello world, this is my new post!","new");
+		assertEquals("List of Recent Posts: [Entry [title=hello, text=hello world, this is my new post!, tag=new]]", blog.getRecentEntrys().toString());
 	}
+		
+	
+	@Test
+	public void searchTagTest() {
+		
+		//add a new entry
+		Blog blog = new Blog();
+		blog.PostEntry("hello","hello world, this is my new post!","new");	
+		//add a new entry
+		blog.PostEntry("bye","hello world, this is my 2 post!","new");
+		//add a new entry
+		blog.PostEntry("hi","hello world, this is my 3 post!","new");
 
+		String string="TAG Search \"new\" : [Entry [title=hello, text=hello world, this is my new post!, tag=new], Entry [title=bye, text=hello world, this is my 2 post!, tag=new], Entry [title=hi, text=hello world, this is my 3 post!, tag=new]]";
+		assertEquals(string, blog.TagSearch("new"));
+	}
+	
+	@Test
+	public void deleteEntryTest() {
+		//add a new entry
+				Blog blog = new Blog();
+				blog.PostEntry("hello","hello world, this is my new post!","new");	
+				//add a new entry
+				blog.PostEntry("bye","hello world, this is my 2 post!","new");
+				//add a new entry
+				blog.PostEntry("hi","hello world, this is my 3 post!","new");
+		// delete entry 
+				blog.DeleteEntry("hello","hello world, this is my new post!","new");	
+			assertEquals("List of Recent Posts: [Entry [title=bye, text=hello world, this is my 2 post!, tag=new], Entry [title=hi, text=hello world, this is my 3 post!, tag=new]]", blog.getRecentEntrys().toString());
+			
+
+	}
+	@Test
+	public void updateAndAllTagsTest() {
+		//add a new entry
+		Blog blog = new Blog();
+		String title="hello";
+		String text="hello world, this is my new post!";
+		String tag="new";
+		blog.PostEntry(title,text,tag);	
+		//add a new entry
+		title="bye";
+		text="hello world, this is my 2 post!";
+		tag="new";
+		blog.PostEntry(title,text,tag);
+		//add a new entry
+		title="hi";
+		text="hello world, this is my 3 post!";
+		tag="new";
+		blog.PostEntry(title,text,tag);
+		Blog blog1 = new Blog();
+		blog1=blog;
+		// update entry
+		title="bye";
+		text="hello world, this is my updated post!";
+		tag="23";
+		blog.UpdateEntry(title,text,tag);
+
+		// show all tags
+		//System.out.println(blog.AllTags());
+		assertEquals("TAG List : [new, 23, new]", blog.AllTags());
+	}
 }

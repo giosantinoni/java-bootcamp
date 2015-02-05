@@ -4,57 +4,87 @@ import java.util.ArrayList;
 
 public class Blog {
 
-	private ArrayList<Entry> entryList = new ArrayList<Entry>();
-	RecentEntryList recentEntryList = new RecentEntryList();
+	private ArrayList<Entry> list= new ArrayList<Entry>();
+	private RecentFilesList recentEntrys = new RecentFilesList();
 	
-	public void post(Entry entry) {
-		entryList.add(entry);
-		recentEntryList.Open(entry);
+	
+	
+	public ArrayList<Entry> getList() {
+		return list;
+	}
+
+	public void setList(ArrayList<Entry> list) {
+		this.list = list;
+	}
+
+	public RecentFilesList getRecentEntrys() {
+		return recentEntrys;
+	}
+
+	public void setRecentEntrys(RecentFilesList recentEntrys) {
+		this.recentEntrys = recentEntrys;
+	}
+
+	public String PostEntry(String title,String text,String tag){
+		Entry entry=new Entry(title,text,tag);
+		list.add(entry);
+		System.out.println("\nAll posts: " + list);
+		recentEntrys.Open(entry);
+		recentEntrys.Show();
+		return recentEntrys.toString();
 	}
 	
-	public void update(Entry entry){
-		for(int i=0; i< entryList.size();i++){
-			if(entryList.get(i).getTitle().equals(entry.getTitle())){
-				entryList.get(i).setBody(entry.getBody());
-				entryList.get(i).setTag(entry.getTag());
-				recentEntryList.Open(entry);
+	public void DeleteEntry(String title,String text,String tag){
+		Entry entry=new Entry(title,text,tag);
+		for(int i=0;i<=list.size()-1;i++){
+			if(list.get(i).getTitle().equals(entry.getTitle())){
+				list.remove(i);
 			}
 		}
+		System.out.println(list);
+		recentEntrys.Delete(entry);
+		recentEntrys.Show();
 	}
 	
-	public void delete(String title){
-		
-		for(int i=0; i< entryList.size();i++) {
-			if(entryList.get(i).getTitle().equals(title)) {
-				recentEntryList.deleteFromRecent(entryList.get(i));
-				entryList.remove(i);
+	public void UpdateEntry(String title,String text,String tag){
+		Entry entry=new Entry(title,text,tag);
+		for(int i=0;i<=list.size()-1;i++){
+			if(list.get(i).getTitle().equals(entry.getTitle())){
+				list.get(i).setText(entry.getText());
+				list.get(i).setTag(entry.getTag());
 			}
 		}
-		
+		System.out.println(list);
+		recentEntrys.Open(entry);
+		recentEntrys.Show();
 	}
 	
-	public void showAllTags(){
-		
-		System.out.println("Listing all Tags: ");
-		for(int i=0; i< entryList.size();i++){
-			System.out.println(entryList.get(i).getTag());
-		}
-	}
-	
-	public void entrySearch(String tag){
-		
-		int flag=0;
-		System.out.println("Blog entrys with the tag " + '"' + tag + '"' + ":");
-		
-		for(int i=0; i< entryList.size();i++){
-			if(entryList.get(i).getTag().equals(tag)){
-				System.out.println(entryList.get(i).getTitle());
-				flag=1;
+	public String TagSearch(String tag){
+		ArrayList<Entry> tagList = new ArrayList<Entry>();
+		Entry entry=new Entry("","",tag);
+		for(int i=0;i<=list.size()-1;i++){
+			if(list.get(i).getTag().equals(entry.getTag())){
+				entry=list.get(i);
+				tagList.add(entry);
 			}
 		}
-		if(flag==0){
-			System.out.println("No entrys with the tag  " + '"' + tag + '"' + " were found");
-		}
+		System.out.println("\n TAG Search \""+ tag + "\" : " + tagList);
+		return "TAG Search \""+ tag + "\" : " + tagList;
 	}
 	
+	public String AllTags(){
+		ArrayList<String> tagList = new ArrayList<String>();
+		String tag=list.get(0).getTag();
+		tagList.add(tag);
+		for(int i=0;i<=list.size()-1;i++){
+			for(int j=0;j<=tagList.size()-1;j++){
+				if(!list.get(i).getTag().equals(tagList.get(j))){
+					tagList.add(list.get(i).getTag());
+				}
+			}
+			
+		}
+		System.out.println("\n TAG List : " + tagList);
+		return "TAG List : " + tagList;
+	}	
 }
