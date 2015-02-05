@@ -156,6 +156,40 @@ LOCK TABLES `Teacher` WRITE;
 INSERT INTO `Teacher` VALUES (1,'Sheldon','Cooper','1979-04-08'),(2,'Leonard','Hofstadter','1979-05-06'),(3,'Bernadette','Rostenkowski','1981-05-28');
 /*!40000 ALTER TABLE `Teacher` ENABLE KEYS */;
 UNLOCK TABLES;
+
+--
+-- Dumping routines for database 'high-school'
+--
+/*!50003 DROP PROCEDURE IF EXISTS `course_statistics` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8 */ ;
+/*!50003 SET character_set_results = utf8 */ ;
+/*!50003 SET collation_connection  = utf8_general_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `course_statistics`(`courseName` varchar(40))
+BEGIN
+	DECLARE passed FLOAT(5,2);
+	DECLARE failed FLOAT(5,2);
+	DECLARE total INT;
+	SET total = (SELECT COALESCE(COUNT(*),0) FROM Registration r JOIN Course c ON r.Course_id = c.id WHERE c.name = `courseName`);
+	SET passed = ((SELECT COALESCE(COUNT(*),0) FROM Registration r JOIN Course c ON r.Course_id = c.id WHERE r.finalNote >= 6 AND c.name = `courseName`));
+	SET failed = ((SELECT COALESCE(COUNT(*),0) FROM Registration r JOIN Course c ON r.Course_id = c.id WHERE r.finalNote < 6 AND c.name = `courseName`));
+	SET passed = (passed/total) *100;
+	SET failed = (failed/total) *100;
+	
+    SELECT passed , failed;
+	
+    COMMIT;
+END ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
@@ -166,4 +200,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2015-02-05 12:50:09
+-- Dump completed on 2015-02-05 12:53:53
