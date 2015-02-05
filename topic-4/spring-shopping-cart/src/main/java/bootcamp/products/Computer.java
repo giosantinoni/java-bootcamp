@@ -1,10 +1,8 @@
-package implementations.products;
+package bootcamp.products;
 
-import interfaces.IItem;
-import interfaces.IVisitor;
+import interfaces.*;
 
-public class Computer implements IItem {
-
+public class Computer implements IProduct{
 	private String name;
 	private double price;
 
@@ -20,8 +18,8 @@ public class Computer implements IItem {
 	public void setName(String name) {
 		this.name = name;
 	}
-
-	public Double getPrice() {
+	
+	public double getPrice() {
 		return price;
 	}
 
@@ -32,12 +30,6 @@ public class Computer implements IItem {
 	@Override
 	public String toString() {
 		return "Computer [name=" + name + ", price=" + price + "]";
-	}
-
-	@Override
-	public void accept(IVisitor visitor) {
-		visitor.visitComputer(this);
-
 	}
 
 }
