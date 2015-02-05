@@ -26,7 +26,7 @@ public class App {
 
 				if (flag) {
 					String teacher = rs.getString("t.lastName") + ", " + rs.getString("t.firstName");
-					System.out.println("Teacher: " + teacher + "\n Students:");
+					System.out.println("Teacher: " + teacher + "\nStudents:");
 					flag = false;
 				}
 				System.out.println("\t" + rs.getString("lastName") + ", " + rs.getString("firstName"));

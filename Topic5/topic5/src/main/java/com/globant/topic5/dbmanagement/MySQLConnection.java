@@ -15,7 +15,7 @@ public class MySQLConnection {
 	public void init() {
 		try {
 			Class.forName("com.mysql.jdbc.Driver");
-			connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/high-school", "root", "password");
+			connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/high-school", "root", "note123++");
 		} catch (SQLException | ClassNotFoundException e) {
 			e.printStackTrace();
 		}
@@ -36,8 +36,11 @@ public class MySQLConnection {
 	public ResultSet getCourse(String courseName) {
 		try {
 			preparedStatement = connection.prepareStatement("SELECT s.firstName, s.lastName, t.firstName, t.lastName"
-					+ "	FROM Course AS c, Student AS s, Teacher AS t, Registration AS r WHERE"
-					+ "    c.id=r.Course_id AND r.Student_id=s.id AND c.Teacher_id=t.id AND c.name = ? " + "ORDER BY s.lastName;");
+					+ "	FROM Student AS s"
+					+ " INNER JOIN Registration r ON r.Student_id = s.id"
+					+ " INNER JOIN Course c ON c.id = r.Course_id"
+					+ " INNER JOIN Teacher t ON c.Teacher_id = t.id"
+					+ " WHERE c.name = ? ORDER BY s.lastName;");
 			preparedStatement.setString(1, courseName);
 			resultSet = preparedStatement.executeQuery();
 		} catch (SQLException e) {
@@ -47,46 +50,13 @@ public class MySQLConnection {
 		return resultSet;
 	}
 
-	public void executeInsert(Object object, String tableName, Field[] fields) {
-		String query = "INSERT into ? VALUES (";
-
-		int length = fields.length;
-		for (int i = 0; i < length; i++) {
-			query += "?";
-
-			if (i != length - 1)
-				query += ", ";
-			else
-				query += ")";
-		}
-
-		try {
-			preparedStatement = connection.prepareStatement(query);
-			preparedStatement.setString(1, tableName);
-
-			int counter = 2;
-
-			for (Field field : fields) {
-				preparedStatement.setString(counter, field.get(object).toString());
-			}
-
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (IllegalArgumentException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (IllegalAccessException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-	}
-
 	public ResultSet getStudentNotes(String lastName) {
 		try {
-			preparedStatement = connection.prepareStatement("SELECT s.lastName, s.firstName, c.name, r.partialNote1,"
-					+ " r.partialNote2, r.partialNote3, r.finalNote	FROM Student AS s, Course AS c, Registration AS r WHERE"
-					+ "    s.lastName = ? AND s.id = r.Student_id AND r.Course_id = c.id ORDER BY 1,7;");
+			preparedStatement = connection.prepareStatement("SELECT s.lastName ,s.firstName, c.name, r.partialNote1, r.partialNote2, r.partialNote3, r.finalNote"
+					+ "	FROM Student s"
+					+ " INNER JOIN Registration r ON s.id = r.Student_id"
+					+ " INNER JOIN Course c ON r.Course_id = c.id"
+					+ " WHERE s.lastName = ? ORDER BY 1, 7;");
 			preparedStatement.setString(1, lastName);
 			resultSet = preparedStatement.executeQuery();
 		} catch (SQLException e) {
@@ -98,9 +68,11 @@ public class MySQLConnection {
 
 	public ResultSet getStudentNotes(int id) {
 		try {
-			preparedStatement = connection.prepareStatement("SELECT s.lastName, s.firstName, c.name, r.partialNote1,"
-					+ " r.partialNote2, r.partialNote3, r.finalNote	FROM Student AS s, Course AS c, Registration AS r WHERE"
-					+ "    s.id = ? AND s.id = r.Student_id AND r.Course_id = c.id ORDER BY 1,7;");
+			preparedStatement = connection.prepareStatement("SELECT s.lastName ,s.firstName, c.name, r.partialNote1, r.partialNote2, r.partialNote3, r.finalNote"
+					+ "	FROM Student s"
+					+ " INNER JOIN Registration r ON s.id = r.Student_id"
+					+ " INNER JOIN Course c ON r.Course_id = c.id"
+					+ " WHERE s.id = ? ORDER BY 1, 7;");
 			preparedStatement.setInt(1, id);
 			resultSet = preparedStatement.executeQuery();
 		} catch (SQLException e) {
@@ -124,9 +96,11 @@ public class MySQLConnection {
 
 	public ResultSet getTeacherTimeLine(int teacherId) {
 		try {
-			preparedStatement = connection.prepareStatement("SELECT t.firstName, t.lastName, c.name, s.day, s.startTime, s.endTime "
-					+ "FROM Teacher AS t, Course AS c, `Schedule` AS s WHERE"
-					+ " t.id = ? AND t.id = c.Teacher_id AND c.id = s.Course_id order by 4;");
+			preparedStatement = connection.prepareStatement("SELECT t.firstName, t.lastName, c.name, s.day, s.startTime, s.endTime"
+					+ "	FROM Teacher t"
+					+ " INNER JOIN Course c ON t.id = c.Teacher_id"
+					+ " INNER JOIN `Schedule` s ON c.id = s.Course_id"
+					+ " WHERE t.id = ? ORDER BY 4;");
 			preparedStatement.setInt(1, teacherId);
 			resultSet = preparedStatement.executeQuery();
 		} catch (SQLException e) {
