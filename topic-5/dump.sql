@@ -1,8 +1,8 @@
--- MySQL dump 10.13  Distrib 5.5.40, for debian-linux-gnu (x86_64)
+-- MySQL dump 10.13  Distrib 5.5.41, for debian-linux-gnu (i686)
 --
 -- Host: localhost    Database: high-school
 -- ------------------------------------------------------
--- Server version	5.5.40-1
+-- Server version	5.5.41-0+wheezy1
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -30,7 +30,7 @@ CREATE TABLE `course` (
   PRIMARY KEY (`id_course`),
   KEY `fk_course_schedule1_idx` (`fk_id_schedule`),
   CONSTRAINT `fk_course_schedule1` FOREIGN KEY (`fk_id_schedule`) REFERENCES `schedule` (`id_schedule`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -39,36 +39,8 @@ CREATE TABLE `course` (
 
 LOCK TABLES `course` WRITE;
 /*!40000 ALTER TABLE `course` DISABLE KEYS */;
-INSERT INTO `course` VALUES (1,'languages 1',5,2),(2,'languages 2',3,1),(3,'languages 3',4,3),(4,'practice 1',3,2),(5,'practice 2',5,3);
+INSERT INTO `course` VALUES (1,'velit in',5,2),(2,'a sollicitudin',5,5),(3,'Vestibulum',4,4),(4,'Mauris non',5,2),(5,'Nullam',3,1),(6,'lorem',3,1),(7,'nibh. Quisque',5,3),(8,'magna. Suspendisse',4,4),(9,'habitant',4,5),(10,'tempus,',4,2);
 /*!40000 ALTER TABLE `course` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Table structure for table `enrollment`
---
-
-DROP TABLE IF EXISTS `enrollment`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `enrollment` (
-  `pk_id_student` int(11) NOT NULL,
-  `pk_id_course` int(11) NOT NULL,
-  PRIMARY KEY (`pk_id_student`,`pk_id_course`),
-  KEY `fk_student_has_course_course1_idx` (`pk_id_course`),
-  KEY `fk_student_has_course_student1_idx` (`pk_id_student`),
-  CONSTRAINT `fk_student_has_course_student1` FOREIGN KEY (`pk_id_student`) REFERENCES `student` (`id_student`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  CONSTRAINT `fk_student_has_course_course1` FOREIGN KEY (`pk_id_course`) REFERENCES `course` (`id_course`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `enrollment`
---
-
-LOCK TABLES `enrollment` WRITE;
-/*!40000 ALTER TABLE `enrollment` DISABLE KEYS */;
-INSERT INTO `enrollment` VALUES (1,1),(2,1),(3,1),(4,1),(5,1),(6,1),(7,1),(8,1),(9,1),(10,1),(11,1),(12,1),(13,1),(14,1),(15,1),(16,1),(17,1),(18,1),(19,1),(20,1),(1,2),(2,2),(3,2),(4,2),(5,2),(6,2),(7,2),(8,2),(9,2),(10,2),(11,2),(12,2),(13,2),(14,2),(15,2),(16,2),(17,2),(18,2),(19,2),(20,2),(1,3),(2,3),(3,3),(4,3),(5,3),(6,3),(7,3),(8,3),(9,3),(10,3),(11,3),(12,3),(13,3),(14,3),(15,3),(16,3),(17,3),(18,3),(19,3),(20,3),(1,4),(2,4),(3,4),(4,4),(5,4),(6,4),(7,4),(8,4),(9,4),(10,4),(11,4),(12,4),(13,4),(14,4),(15,4),(16,4),(17,4),(18,4),(19,4),(20,4),(1,5),(2,5),(3,5),(4,5),(5,5),(6,5),(7,5),(8,5),(9,5),(10,5),(11,5),(12,5),(13,5),(14,5),(15,5),(16,5),(17,5),(18,5),(19,5),(20,5);
-/*!40000 ALTER TABLE `enrollment` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -80,18 +52,12 @@ DROP TABLE IF EXISTS `exam_result`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `exam_result` (
   `id_exam` int(11) NOT NULL AUTO_INCREMENT,
-  `note1` int(11) NOT NULL,
-  `note2` int(11) NOT NULL,
-  `note3` int(11) NOT NULL,
-  `final_note` int(11) NOT NULL,
-  `fk_id_student` int(11) NOT NULL,
-  `fk_id_course` int(11) NOT NULL,
-  PRIMARY KEY (`id_exam`),
-  KEY `fk_exam_result_student1_idx` (`fk_id_student`),
-  KEY `fk_exam_result_course1_idx` (`fk_id_course`),
-  CONSTRAINT `fk_exam_result_student1` FOREIGN KEY (`fk_id_student`) REFERENCES `student` (`id_student`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  CONSTRAINT `fk_exam_result_course1` FOREIGN KEY (`fk_id_course`) REFERENCES `course` (`id_course`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8;
+  `note1` double NOT NULL,
+  `note2` double NOT NULL,
+  `note3` double NOT NULL,
+  `final_note` double NOT NULL,
+  PRIMARY KEY (`id_exam`)
+) ENGINE=InnoDB AUTO_INCREMENT=21 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -100,7 +66,7 @@ CREATE TABLE `exam_result` (
 
 LOCK TABLES `exam_result` WRITE;
 /*!40000 ALTER TABLE `exam_result` DISABLE KEYS */;
-INSERT INTO `exam_result` VALUES (1,8,2,10,8,1,5),(2,9,2,7,4,12,1),(3,4,7,5,1,18,3),(4,7,10,6,5,1,1),(5,10,4,10,5,3,1),(6,10,7,10,2,8,3),(7,3,9,5,6,20,1),(8,1,6,10,7,10,5),(9,5,5,7,7,11,1);
+INSERT INTO `exam_result` VALUES (1,4,4,6,3),(2,5,5,9,4),(3,1,4,10,8),(4,8,4,8,5),(5,1,8,6,1),(6,4,2,9,7),(7,8,1,2,4),(8,5,3,4,10),(9,10,2,4,7),(10,4,1,9,6),(11,7,6,10,10),(12,10,2,6,3),(13,3,4,10,5),(14,1,10,9,8),(15,1,6,8,8),(16,10,7,9,2),(17,2,8,10,6),(18,10,10,9,1),(19,7,3,9,6),(20,8,7,2,4);
 /*!40000 ALTER TABLE `exam_result` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -113,11 +79,11 @@ DROP TABLE IF EXISTS `schedule`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `schedule` (
   `id_schedule` int(11) NOT NULL AUTO_INCREMENT,
-  `day` varchar(10) NOT NULL,
+  `day` varchar(45) NOT NULL,
   `start_time` time NOT NULL,
   `end_time` time NOT NULL,
   PRIMARY KEY (`id_schedule`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -126,7 +92,7 @@ CREATE TABLE `schedule` (
 
 LOCK TABLES `schedule` WRITE;
 /*!40000 ALTER TABLE `schedule` DISABLE KEYS */;
-INSERT INTO `schedule` VALUES (1,'tuesday','05:57:42','00:00:00'),(2,'sunday','10:48:46','13:51:49'),(3,'thursday','15:05:22','18:08:25'),(4,'tuesday','11:40:45','14:43:48'),(5,'sunday','09:23:08','12:26:11'),(6,'friday','02:08:15','05:11:18');
+INSERT INTO `schedule` VALUES (1,'Monday','08:00:00','12:00:00'),(2,'Tuesday','08:00:00','12:00:00'),(3,'Wednesday','08:00:00','12:00:00'),(4,'Thursday','08:00:00','12:00:00'),(5,'Saturday','08:00:00','12:00:00');
 /*!40000 ALTER TABLE `schedule` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -141,10 +107,16 @@ CREATE TABLE `student` (
   `id_student` int(11) NOT NULL AUTO_INCREMENT,
   `first_name` varchar(20) NOT NULL,
   `last_name` varchar(15) NOT NULL,
-  `registration_number` int(11) DEFAULT NULL,
-  `date_of_birth` date DEFAULT NULL,
-  PRIMARY KEY (`id_student`)
-) ENGINE=InnoDB AUTO_INCREMENT=21 DEFAULT CHARSET=utf8;
+  `registration_number` int(11) NOT NULL,
+  `date_of_birth` date NOT NULL,
+  `fk_id_course` int(11) NOT NULL,
+  `fk_id_exam` int(11) NOT NULL,
+  PRIMARY KEY (`id_student`),
+  KEY `fk_student_course_idx` (`fk_id_course`),
+  KEY `fk_student_exam_result1_idx` (`fk_id_exam`),
+  CONSTRAINT `fk_student_course` FOREIGN KEY (`fk_id_course`) REFERENCES `course` (`id_course`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  CONSTRAINT `fk_student_exam_result1` FOREIGN KEY (`fk_id_exam`) REFERENCES `exam_result` (`id_exam`) ON DELETE NO ACTION ON UPDATE NO ACTION
+) ENGINE=InnoDB AUTO_INCREMENT=101 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -153,7 +125,7 @@ CREATE TABLE `student` (
 
 LOCK TABLES `student` WRITE;
 /*!40000 ALTER TABLE `student` DISABLE KEYS */;
-INSERT INTO `student` VALUES (1,'mike1','cash1',1,'1980-01-01'),(2,'mike2','cash2',2,'1981-02-02'),(3,'mike3','cash3',3,'1982-03-03'),(4,'mike4','cash4',4,'1982-04-04'),(5,'mike5','cash5',5,'1983-05-05'),(6,'mike6','cash6',6,'1984-06-06'),(7,'mike7','cash7',7,'1985-07-07'),(8,'mike8','cash8',8,'1986-08-08'),(9,'mike9','cash9',9,'1987-09-09'),(10,'mike10','cash10',10,'1988-09-09'),(11,'mike11','cash11',11,'1989-10-23'),(12,'mike12','cash12',12,'1981-11-11'),(13,'mike13','cash13',13,'1984-12-12'),(14,'mike14','cash14',14,'1984-12-03'),(15,'mike15','cash15',15,'1986-04-30'),(16,'mike16','cash16',16,'1987-03-12'),(17,'mike17','cash17',17,'1989-09-11'),(18,'mike18','cash18',18,'1984-05-05'),(19,'mike19','cash19',19,'1980-12-19'),(20,'mike20','cash20',20,'1983-12-12');
+INSERT INTO `student` VALUES (1,'George','Sharpe',3273,'1995-12-08',1,15),(2,'Omar','Riddle',9310,'1992-04-26',1,7),(3,'Fletcher','Randall',9180,'1992-04-12',1,9),(4,'Ronan','Hatfield',2359,'1990-01-16',1,15),(5,'Colt','Salas',9384,'1989-10-29',1,12),(6,'Plato','Hansen',1291,'1998-05-31',1,6),(7,'Brody','Finley',3128,'1992-09-03',1,12),(8,'Colorado','Lang',2543,'1993-01-08',1,3),(9,'Clarke','Kaufman',2858,'2000-06-28',1,17),(10,'Cole','Gomez',5910,'1989-10-30',1,13),(11,'Ashton','Cannon',5177,'1997-04-12',1,7),(12,'Damon','Tyler',5188,'2000-05-22',1,12),(13,'Byron','Byers',4451,'1994-03-11',1,4),(14,'Lucius','Shields',6518,'1993-02-16',1,4),(15,'Trevor','Baxter',5632,'1999-10-01',1,16),(16,'Sean','Barlow',1283,'1995-07-08',1,15),(17,'Raphael','Merrill',9807,'1999-08-24',1,16),(18,'Zachary','Cochran',2068,'1994-05-12',1,6),(19,'Orson','Kerr',5983,'1993-02-11',1,10),(20,'Abbot','Kelly',9976,'1997-05-11',1,20),(21,'Cadman','Decker',4672,'1991-05-30',2,11),(22,'Asher','Kirby',1634,'2000-11-16',2,8),(23,'Kirk','Cervantes',2446,'1990-05-14',2,8),(24,'Clarke','Francis',2274,'1998-07-07',2,3),(25,'Christopher','Randall',5377,'1992-03-28',2,7),(26,'Herrod','Horn',1662,'1999-12-10',2,18),(27,'Kaseem','Reeves',3911,'1997-12-21',2,20),(28,'Ethan','Murray',4909,'1998-09-06',2,7),(29,'Gareth','Myers',4751,'1991-05-13',2,11),(30,'Wesley','Rios',1770,'1998-12-10',2,5),(31,'Kasimir','Blackwell',9506,'1993-06-20',2,10),(32,'Joseph','Monroe',7844,'2000-01-16',2,10),(33,'Vernon','Hartman',9619,'1995-08-15',2,17),(34,'Jerome','Rivers',4712,'1998-02-22',2,5),(35,'Yoshio','Dillon',2316,'1991-02-20',2,1),(36,'Emery','Parrish',8004,'1989-12-29',2,15),(37,'Malik','Hawkins',5721,'1996-04-29',2,9),(38,'Lance','Gregory',2080,'1997-01-13',2,17),(39,'Kane','Salinas',5593,'1995-09-01',2,9),(40,'Aladdin','Cantrell',7320,'1989-04-16',2,19),(41,'Zeph','Downs',6253,'2000-05-09',3,5),(42,'Timon','Smith',6916,'1998-04-05',3,9),(43,'Jordan','Goodman',2815,'2000-01-09',3,19),(44,'Garth','Morrow',8030,'1999-06-06',3,3),(45,'Devin','Tran',4909,'1990-08-13',3,11),(46,'Fritz','Todd',4731,'1998-02-24',3,1),(47,'Zachary','House',4909,'1989-02-16',3,15),(48,'Carlos','Gross',9402,'1996-05-28',3,6),(49,'Dalton','Bass',3747,'1992-01-12',3,8),(50,'Brett','Bolton',9734,'1998-09-02',3,13),(51,'Orlando','Harris',9588,'1991-03-19',3,19),(52,'Conan','Ray',4471,'1992-12-27',3,7),(53,'John','Rowe',4850,'1989-02-16',3,11),(54,'Ferdinand','Yates',2754,'1991-01-05',3,9),(55,'Vaughan','Alston',3505,'1991-07-30',3,10),(56,'Xenos','Moses',5746,'1997-11-03',3,20),(57,'Clark','Clemons',7551,'1994-10-20',3,20),(58,'Fletcher','Macdonald',8542,'1992-09-06',3,16),(59,'Yardley','Perez',6112,'1993-02-19',3,13),(60,'Graham','Daniels',4173,'1994-09-13',3,8),(61,'Malcolm','Shepherd',1175,'1992-01-25',4,3),(62,'Jin','Bright',4477,'1996-08-25',4,18),(63,'Victor','Reed',3904,'1989-12-08',4,12),(64,'Dale','Price',7191,'1989-08-22',4,18),(65,'Blaze','Watts',4999,'2000-04-27',4,8),(66,'Nolan','Stout',4719,'1995-07-19',4,3),(67,'Howard','Oconnor',5884,'1989-11-29',4,11),(68,'Dale','Hurley',7182,'1995-11-06',4,7),(69,'Acton','Terry',1588,'1992-10-23',4,1),(70,'Steven','Kerr',9657,'1999-08-16',4,13),(71,'Boris','Chan',9285,'1999-03-04',4,18),(72,'Bevis','Camacho',2304,'1989-11-25',4,11),(73,'Otto','Nixon',3710,'1997-11-04',4,19),(74,'Dorian','Holloway',3799,'1994-04-20',4,14),(75,'Harlan','May',4296,'1998-05-20',4,11),(76,'Carlos','Nicholson',7310,'1990-01-03',4,16),(77,'Lance','Patton',7210,'1991-03-07',4,2),(78,'Nathaniel','Mccall',5326,'1998-11-08',4,10),(79,'Alvin','Acosta',7019,'1993-01-09',4,20),(80,'Vernon','Martinez',8185,'1997-02-12',4,13),(81,'Carlos','Becker',5980,'1995-02-23',5,15),(82,'Kenneth','Sanchez',9788,'1996-05-15',5,4),(83,'Baker','Vinson',5267,'1996-10-16',5,3),(84,'Troy','Parker',7590,'1999-11-24',5,10),(85,'Cyrus','Battle',9605,'1993-11-23',5,9),(86,'Amir','Rivas',1659,'1996-06-23',5,9),(87,'Keegan','Jarvis',8291,'1996-08-20',5,6),(88,'Ciaran','Pierce',9078,'1998-04-08',5,10),(89,'Jackson','Stein',3623,'1999-05-03',5,15),(90,'Declan','Fuller',3211,'1989-07-02',5,15),(91,'Tobias','Mckay',3225,'1994-11-06',5,12),(92,'Calvin','Hyde',5721,'1999-12-06',5,18),(93,'Baker','Sparks',7888,'1995-06-25',5,16),(94,'Berk','Atkins',8484,'1994-04-14',5,8),(95,'Vernon','Harvey',8996,'1991-08-23',5,11),(96,'Cody','Small',5803,'1999-05-15',5,17),(97,'Zephania','Goff',4886,'1995-01-01',5,8),(98,'Hall','Larsen',3932,'1993-10-05',5,19),(99,'Stewart','Mcdonald',4033,'1991-04-13',5,20),(100,'Dale','Perry',9470,'1995-08-10',5,13);
 /*!40000 ALTER TABLE `student` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -168,9 +140,12 @@ CREATE TABLE `teacher` (
   `id_teacher` int(11) NOT NULL AUTO_INCREMENT,
   `first_name` varchar(20) NOT NULL,
   `last_name` varchar(15) NOT NULL,
-  `date_of_birth` date DEFAULT NULL,
-  PRIMARY KEY (`id_teacher`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
+  `date_of_birth` date NOT NULL,
+  `fk_id_course` int(11) NOT NULL,
+  PRIMARY KEY (`id_teacher`),
+  KEY `fk_teacher_course1_idx` (`fk_id_course`),
+  CONSTRAINT `fk_teacher_course1` FOREIGN KEY (`fk_id_course`) REFERENCES `course` (`id_course`) ON DELETE NO ACTION ON UPDATE NO ACTION
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -179,36 +154,60 @@ CREATE TABLE `teacher` (
 
 LOCK TABLES `teacher` WRITE;
 /*!40000 ALTER TABLE `teacher` DISABLE KEYS */;
-INSERT INTO `teacher` VALUES (1,'john','doe','1980-12-12'),(2,'john','doe','1980-02-01'),(3,'mary','jane','1988-04-09'),(4,'peter','green','1981-04-19');
+INSERT INTO `teacher` VALUES (1,'Selma','Kline','1980-10-18',7),(2,'Olympia','Cooley','1981-05-24',4),(3,'Eden','Kane','1982-03-27',9),(4,'Regina','Jefferson','1980-02-29',2),(5,'Lila','Ballard','1982-03-04',8),(6,'Melanie','Austin','1980-04-01',4),(7,'Kessie','Morton','1982-11-29',1),(8,'Sandra','Morrison','1982-06-14',2),(9,'Janna','Christensen','1982-08-12',6),(10,'Cara','Heath','1983-09-01',4);
 /*!40000 ALTER TABLE `teacher` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
--- Table structure for table `teacher_has_course`
+-- Dumping routines for database 'high-school'
 --
-
-DROP TABLE IF EXISTS `teacher_has_course`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `teacher_has_course` (
-  `pk_id_teacher` int(11) NOT NULL,
-  `pk_id_course` int(11) NOT NULL,
-  PRIMARY KEY (`pk_id_teacher`,`pk_id_course`),
-  KEY `fk_teacher_has_course_course1_idx` (`pk_id_course`),
-  KEY `fk_teacher_has_course_teacher1_idx` (`pk_id_teacher`),
-  CONSTRAINT `fk_teacher_has_course_teacher1` FOREIGN KEY (`pk_id_teacher`) REFERENCES `teacher` (`id_teacher`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  CONSTRAINT `fk_teacher_has_course_course1` FOREIGN KEY (`pk_id_course`) REFERENCES `course` (`id_course`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `teacher_has_course`
---
-
-LOCK TABLES `teacher_has_course` WRITE;
-/*!40000 ALTER TABLE `teacher_has_course` DISABLE KEYS */;
-/*!40000 ALTER TABLE `teacher_has_course` ENABLE KEYS */;
-UNLOCK TABLES;
+/*!50003 DROP PROCEDURE IF EXISTS `getStudentIdByName` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8 */ ;
+/*!50003 SET character_set_results = utf8 */ ;
+/*!50003 SET collation_connection  = utf8_general_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = '' */ ;
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `getStudentIdByName`(
+    in studentFirstName varchar(20), 
+    in studentLastName varchar(15), 
+    out id int
+)
+BEGIN
+    select id_student into id
+    from student as s
+    where s.first_name = studentFirstName
+        and s.last_name = studentLastName;
+END ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 DROP PROCEDURE IF EXISTS `getStudentIdByRegNumber` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8 */ ;
+/*!50003 SET character_set_results = utf8 */ ;
+/*!50003 SET collation_connection  = utf8_general_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = '' */ ;
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `getStudentIdByRegNumber`(in studentRegNumber varchar(15), out id int)
+BEGIN
+    select id_student into id 
+    from student as s 
+    where s.registration_number = studentRegNumber;  
+END ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
@@ -219,4 +218,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2015-02-06  1:09:01
+-- Dump completed on 2015-02-08 12:46:12

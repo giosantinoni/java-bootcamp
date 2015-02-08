@@ -53,6 +53,8 @@ public abstract class DBConnection {
 
 	public abstract void connect() throws SQLException, ClassNotFoundException;
 
+	public abstract void close() throws SQLException, ClassNotFoundException;
+
 	public Connection getConnection() {
 		return connection;
 	}

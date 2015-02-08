@@ -42,4 +42,13 @@ public final class MySqlConnection extends DBConnection {
 		}
 	}
 
+	@Override
+	public void close() {
+		try {
+			getConnection().close();
+		} catch (SQLException ex) {
+			System.err.println(ex.getMessage());
+			JOptionPane.showMessageDialog(null, "Error closing the database...", "WARNING", JOptionPane.ERROR_MESSAGE);
+		}
+	}
 }
