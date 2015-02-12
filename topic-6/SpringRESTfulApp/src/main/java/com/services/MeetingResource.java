@@ -35,15 +35,6 @@ public class MeetingResource {
 	private static Map<Integer, Meeting> dbMeetings = new HashMap<Integer, Meeting>();
 	private AtomicInteger idCounter = new AtomicInteger();
 
-	/*
-	 * static { for (int i = 0; i < 10; i++) { Meeting meeting = new Meeting();
-	 * int id = i + 1; meeting.setId(id); meeting.setName("my meeting name " +
-	 * id); meeting.setStartTime("start time " + id);
-	 * meeting.setEndTime("end time " + id);
-	 * 
-	 * dbMeetings.put(id, meeting); } }
-	 */
-	
 	@GET
 	@Path("{id}")
 	@Produces("application/xml")

@@ -1,19 +1,19 @@
 package com.model;
 
-import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlType;
+import java.util.ArrayList;
 
-import com.sun.xml.txw2.annotation.XmlElement;
-
-@XmlRootElement(name = "meeting")
-@XmlType(propOrder = {"id", "name", "startTime", "endTime"})
 public class Meeting {
 	private int id;
 	private String name;
 	private String startTime;
 	private String endTime;
+	private ArrayList<Attendee> attendees;
+	private Room room;
 
-	@XmlElement
+	public Meeting() {
+		this.attendees = new ArrayList<Attendee>();
+	}
+
 	public int getId() {
 		return id;
 	}
@@ -22,7 +22,6 @@ public class Meeting {
 		this.id = id;
 	}
 
-	@XmlElement
 	public String getName() {
 		return name;
 	}
@@ -31,7 +30,6 @@ public class Meeting {
 		this.name = name;
 	}
 
-	@XmlElement
 	public String getStartTime() {
 		return startTime;
 	}
@@ -40,13 +38,32 @@ public class Meeting {
 		this.startTime = startTime;
 	}
 
-	@XmlElement
 	public String getEndTime() {
 		return endTime;
 	}
 
 	public void setEndTime(String endTime) {
 		this.endTime = endTime;
+	}
+
+	public ArrayList<Attendee> getAttendees() {
+		return attendees;
+	}
+
+	public void setAttendees(ArrayList<Attendee> attendees) {
+		this.attendees = attendees;
+	}
+
+	public Room getRoom() {
+		return room;
+	}
+
+	public void setRoom(Room room) {
+		this.room = room;
+	}
+	
+	public void addAttendee(Attendee attendee) {
+		this.attendees.add(attendee);
 	}
 
 }
