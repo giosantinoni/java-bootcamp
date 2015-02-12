@@ -6,7 +6,9 @@ import java.util.Set;
 import javax.ws.rs.ApplicationPath;
 import javax.ws.rs.core.Application;
 
+import com.services.AttendeeResource;
 import com.services.MeetingResource;
+import com.services.RoomResource;
 
 @ApplicationPath("/services")
 public class ApplicationConfig extends Application {
@@ -16,6 +18,8 @@ public class ApplicationConfig extends Application {
 	
 	public ApplicationConfig() {
 		singletons.add(new MeetingResource());
+		singletons.add(new AttendeeResource());
+		singletons.add(new RoomResource());
 	}
 	
 	public Set<Class<?>> getClasses() {
